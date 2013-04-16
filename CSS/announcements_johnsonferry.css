@@ -1,0 +1,240 @@
+﻿.Rotator 
+{
+  border:solid 1px black; 
+  background-color:white;
+  cursor:default; 
+}
+.RotatorFrame 
+{
+  border:solid 1px white; 
+  width:450px; 
+  font-family:verdana; 
+  font-size:11px; 
+  background-color:white; 
+  cursor:default;
+}
+
+.RotatorFrameOver 
+{
+  border:solid 1px darkgray; 
+  border-bottom-color:Black;
+  border-right-color:Black;
+  width:450px; 
+  height:25px; 
+  font-family:verdana; 
+  font-size:11px; 
+  background-color:white; 
+  cursor:default;
+}
+
+.ProductTitle
+{
+  font-family:Verdana;
+  font-size:12px;   
+  font-weight:bold; 
+}
+
+.ProductText
+{
+  font-family:Verdana;
+  font-size:11px;   
+  color:darkslategray;
+  width:220px;
+}
+
+.ProductPrice
+{
+  font-family:Verdana;
+  font-size:12px;   
+  font-weight:bold; 
+  color:Red; 
+}
+
+
+.promotionThumbItemStyle {
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left:10px;
+	padding-right:5;
+	width: 50%;
+}
+
+.promotionThumbAltItemStyle {
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left:10px;
+	padding-right:5;
+	width: 50%;
+}
+
+.promotionThumb {
+	border: solid 1px #A4A3A3;
+	width: 100%;
+}
+.promotionThumbTitle {
+	margin-top: 0px;
+	padding: 8px 0px 3px 8px;
+	text-align: left;
+	background-color: #EFEFEF;
+}
+
+.promotionThumbImg {
+	overflow: hidden;
+	height: 50px;
+	text-align: left;
+	float: left;
+	position:relative;
+}
+
+.promotionThumbSummary {
+	padding: 0px 5px 5px 8px;
+	background-color: #EFEFEF;
+	min-height: 40px;
+}
+.promotionThumbMoreInfo {
+	text-align: right;
+	border-top: solid 1px #A4A3A3;
+    background-color:#fff;
+}
+.promotionThumbMoreInfo a {
+display:block;
+padding: 5px;
+}
+.promotionThumbMoreInfo a:hover {
+	color: #fff;
+	background-color: #09336D;
+}
+* html div .promotionThumbSummary,* html div .promotionThumbTitle,* html div .promotionThumb,* html div .promotionThumbMoreInfo,* html div .promotionThumbMoreInfo a { 
+/* IE Only Settings*/
+	width:175px;
+	w\idth:175px;
+}
+
+
+#mod01 .promotionThumbItemStyle {
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left:10px;
+	padding-right:5;
+}
+
+#mod01 .promotionThumbAltItemStyle {
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left:10px;
+	padding-right:5;
+}
+
+#mod01 .promotionThumb {
+	border: solid 1px #A4A3A3;
+	position:relative;
+	float: left;
+	width: 155px;
+background-color:#333;
+}
+#mod01 .promotionThumbTitle {
+float: left;
+position: relative;
+	margin-top: 0px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	padding: 4px 0px 3px 8px;
+	font-weight: bold;
+	color: #777;
+	text-align: left;
+width: 147px;
+}
+
+#mod01 .promotionThumbImg {
+	overflow: hidden;
+	text-align: left;
+	float: left;
+	position:relative;
+}
+* html div #mod01 .promotionThumbImg img {
+	margin-right: -83px;
+}
+
+#mod01 .promotionThumbSummary {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 8px 5px 5px 8px;
+	position:relative;
+	float: left;
+	line-height: 1.2em;
+	background-color: #EFEFEF;
+	width:142px;
+}
+#mod01 .promotionThumbMoreInfo {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	border-top: solid 1px #A4A3A3;
+	float: right;
+	position:relative;
+	width:155px;
+background-color:#fff;
+}
+#mod01 .promotionThumbMoreInfo a {
+display:block;
+width:145px;
+padding: 5px;
+position:relative;
+}
+#mod01 .promotionThumbMoreInfo a:hover {
+	color: #fff;
+	background-color: #09336D;
+}
+* html div #mod01 .promotionThumbSummary,* html div #mod01 .promotionThumbTitle,* html div #mod01 .promotionThumb,* html div #mod01 .promotionThumbMoreInfo,* html div #mod01 .promotionThumbMoreInfo a { 
+/* IE Only Settings*/
+	width:155px;
+	w\idth:155px;
+}
+
+/* ministry page promos */
+#mod03 .promotionThumbImg {
+	overflow: hidden;
+	height: 50px;
+	text-align: left;
+	float: left;
+	position:relative;
+}
+* html div .promotionThumbImg img {
+	margin-right: -83px;
+}
+
+#mod03 .promotionThumbSummary {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 8px 5px 5px 8px;
+	position:relative;
+	float: left;
+	line-height: 1.2em;
+	background-color: #EFEFEF;
+	width:142px;
+}
+#mod03 .promotionThumbMoreInfo {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	border-top: solid 1px #A4A3A3;
+	float: right;
+	position:relative;
+	width:155px;
+background-color:#fff;
+}
+#mod03 .promotionThumbMoreInfo a {
+display:block;
+width:145px;
+padding: 5px;
+position:relative;
+}
+#mod03 .promotionThumbMoreInfo a:hover {
+	color: #fff;
+	background-color: #09336D;
+}
+* html div #mod03 .promotionThumbSummary,* html div #mod03 .promotionThumbTitle,* html div #mod01 .promotionThumb,* html div #mod03 .promotionThumbMoreInfo,* html div #mod03 .promotionThumbMoreInfo a { 
+/* IE Only Settings*/
+	width:155px;
+	w\idth:155px;
+}

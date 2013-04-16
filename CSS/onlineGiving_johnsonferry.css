@@ -1,0 +1,8 @@
+﻿@import url("/css/onlineGiving.css");
+
+
+td.givingWizardItem, 
+td.givingWizardFooterItem
+{
+    padding-left: 6px;
+}

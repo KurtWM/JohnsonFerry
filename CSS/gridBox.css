@@ -1,0 +1,90 @@
+﻿table.GridBox 
+{
+  width: 100%;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4em;
+  font-style: normal;
+  border-collapse:separate;
+}
+
+table.GridBox th
+{
+  
+}
+
+table.GridBox tr td.GridHeader 
+{
+  font-weight: bold;
+  padding:9px;
+  color:#fff;
+  text-shadow:1px 1px 1px rgb(34, 43, 99);
+  border:0px solid #FFFFFF;
+  background-color:rgb(83, 106, 237);
+  background:-webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.02, rgb(71, 91, 204)),
+      color-stop(0.51, rgb(83, 106, 237)),
+      color-stop(0.87, rgb(104, 127, 255))
+      );
+  background: -moz-linear-gradient(
+      center bottom,
+      rgb(71, 91, 204) 2%,
+      rgb(83, 106, 237) 51%,
+      rgb(104, 127, 255) 87%
+      );
+}
+
+table.GridBox tr.GridItem td,
+table.GridBox tr.GridAltItem td {
+  padding:3px 10px;
+  text-align:left;
+  background-color:rgb(221, 226, 255) !important;
+  border: 0px solid #FFFFFF;
+  color:#666;
+}
+
+table.GridBox tr.GridAltItem td {
+  background-color: rgb(201, 209, 255) !important;
+}
+
+table.GridBox tr.GridFooter td
+{
+  color: rgb(83, 106, 237);
+  font-size:14px;
+  text-align:center;
+  padding:10px 0px;
+}
+
+table.GridBox tr.GridItem td:nth-child(3)
+{
+    /*content : url(/images/edit.gif)*/
+}
+
+table.GridBox tr td:empty 
+{
+  background:transparent !important;
+  border-width:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:none !important;
+}
+
+.CommandButton {
+}
+
+.NormalWarning {
+}
+
+.Footer {
+}
+
+.SubHead 
+{
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+

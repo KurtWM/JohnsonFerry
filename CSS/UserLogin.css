@@ -1,0 +1,28 @@
+﻿.loginWrap 
+{
+    position: absolute;
+    width: 280px;
+    top: 130px;
+    left: 10px;
+}
+
+.loginTable input.formItem
+{
+    width: 150px;
+    margin-bottom: 6px;
+}
+
+.forgotPass h3
+{
+    margin-top: 18px;
+}
+
+.loginTable input.smallText
+{
+    position: relative;
+    top: -33px; /*-21px;*/
+    left: 92px;
+    width: 63px;
+}
+
+

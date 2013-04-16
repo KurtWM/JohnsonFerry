@@ -1,0 +1,130 @@
+﻿#menu {
+    position: relative;
+    z-index: 100;
+}
+#menu .menu {
+}
+#menu * {
+    border: 0 none;
+    list-style: none outside none;
+}
+#menu a {
+    display: block;
+    white-space: nowrap;
+}
+#menu li {
+}
+#menu li li {
+    float: none;
+}
+#menu div {
+    background: none repeat scroll 0 0 transparent;
+    position: absolute;
+    visibility: hidden;
+}
+#menu div div {
+    left: 100%;
+    margin: -25px 0 0 -1px;
+}
+#menu div div div {
+    left: 100%;
+    margin: -35px 0 0 -1px;
+}
+#menu li:hover > div {
+    visibility: visible;
+}
+#menu a {
+    color: #FFFFFF;
+    position: relative;
+    text-decoration: none;
+    z-index: 77;
+}
+#menu a:hover {
+    background: url("images/20percentBrite_80percentOpacity_16px.png") repeat-x scroll left -43px transparent;
+    color: #FFFFFF;
+}
+#menu li.current {
+}
+#menu a:hover span {
+    color: #FFFFFF;
+}
+#menu li.current a {
+}
+#menu li.current span {
+}
+#menu > ul > li:hover > a {
+}
+#menu > ul > li {
+    border-left: 1px solid Transparent;
+    border-right: 1px solid Transparent;
+    border-top: 1px solid Transparent;
+    margin-left: 4px;
+}
+#menu > ul > li.hilited {
+    border-left: 1px solid #3A7FCE;
+    border-right: 1px solid #3A7FCE;
+    border-top: 1px solid #3A7FCE;
+}
+#menu > ul > li:hover > a span {
+    color: #FFFFFF;
+}
+#menu span {
+}
+#menu li {
+}
+#menu > ul > li > div > ul {
+    margin-left: -13px !important;
+    margin-top: 6px !important;
+}
+#menu ul ul {
+    border: 1px solid #3A7FCE;
+    margin-left: 0;
+    margin-top: -1px;
+    width: 150px;
+}
+#menu li li {
+    background: url("images/20percentBrite_80percentOpacity_16px.png") repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #3A7FCE;
+}
+#menu li li a {
+    background: none repeat scroll 0 0 #005161;
+    color: #FFFFFF;
+    padding: 0;
+    position: static;
+    text-align: left;
+    text-transform: none;
+    white-space: normal;
+    width: 100%;
+}
+#menu li.current li a {
+    background: none repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+}
+#menu li.current li span {
+    color: #FFFFFF;
+}
+#menu li li a:hover {
+    background: none repeat scroll 0 0 Green;
+}
+#menu li li a span {
+    color: #FFFFFF;
+    line-height: 15px;
+    padding: 5px;
+}
+#menu li li a:hover span {
+    color: #FFFFFF;
+}
+#menu li li a.parent span {
+    /*background: url("images/bkgnd_d.png") no-repeat scroll right 50% transparent;*/
+    z-index: 101;
+}
+#menu li li span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0;
+    padding: 0 25px 0 0;
+    text-transform: none;
+}
+div#copyright {
+    display: none;
+}

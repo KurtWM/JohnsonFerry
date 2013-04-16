@@ -1,0 +1,45 @@
+﻿.TopMenuGroup
+{
+}
+
+.MenuGroup
+{
+}
+
+.TopMenuItem
+{
+}
+
+.TopMenuItemHover
+{
+    cursor: pointer;
+}
+
+.SubMenuItem
+{
+}
+
+.SubMenuItemHover
+{
+    cursor: pointer;
+}
+
+.MenuItem
+{
+}
+
+.MenuItemHover
+{
+    cursor: pointer;
+}
+
+.TopMenuItemActive
+{
+    font-weight: bold;
+}
+
+.TopMenuItemHoverActive
+{
+    cursor: pointer;
+    font-weight: bold;
+}

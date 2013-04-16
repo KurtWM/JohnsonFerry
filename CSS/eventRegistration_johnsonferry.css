@@ -1,0 +1,375 @@
+/*
+<!-- BASIC STRUCTURE OF THE EVENT REGISTRATION PAGE SECTION: -->
+<img style="border-width:0px;" src="images/RegistrationProcess_4.gif" class="registrationProcessImage" id="">
+<div>
+	<div id="registrationPage[#]" class="registrationPage">
+		<div class="registrationEventTitle" id="">
+			<h1>[EVENT TITLE]</h1>
+		</div>
+		<div class="registrationEventDates" id="">
+			[m/d/yyyy] - [m/d/yyyy]
+		</div>
+		<div class="registrationEventCost" id="">
+			...
+		</div>
+		<div class="registrationDetails" id="">
+			<div class="registrationTitle" id="">
+				<h1>
+					How many Individuals do you wish to register for this Event?
+				</h1>
+			</div>
+			<span class="registrationLabel" id="">Individuals</span>
+			<select class="registrationForm" id="" name="">
+				<option value="1" selected="selected">1</option>
+				<option value="2">2</option>
+				...
+			</select>
+			<!-- BEGIN EXAMPLE OF QUESTIONS IN A TABLE: -->
+			<table cellspacing="3" cellpadding="0">
+				<tbody>
+					<tr>
+						<td valign="top" class="registrationLabelRequired">First Name</td>
+						<td nowrap="nowrap" valign="top" class="registrationForm">
+							<input type="text" style="width:100px;" class="registrationForm" id="" maxlength="40" name="">
+								<span style="color:Red;display:none;" class="errorText" id="">*</span>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" class="registrationLabel">Cell Phone</td>
+						<td nowrap="nowrap" valign="top" class="registrationForm">
+							<input type="text" style="width:100px;" class="registrationForm" id="" maxlength="50" name="">
+							<span style="color:Red;display:none;" class="errorText" id="">*</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- END EXAMPLE OF QUESTIONS IN A TABLE: -->
+		</div>
+		<div class="registrationCostFeesContainer" id="">
+			<div class="registrationParentCostsFeesContainer"></div>
+		</div>
+		<div class="registrationRunningTotalContainer" id="">
+			<span class="registrationRunningTotalLabel" id="runningTotalLabel">Total:</span>
+			<span class="registrationRunningTotalValue" id="runningTotalValue">$0.00</span>
+		</div>
+		<!-- THE FOLLOWING CONTROLS APPEAR ON THE SUMMARY PAGE: -->
+		<div class="registrationTitle registrationSummaryTitle" id="">
+			<h1>Registration Summary</h1>
+		</div>
+		<div class="registrationDetails registrationSummaryDetails" id="ctl07_ctl04_pnlSummary">
+			[John Doe] will be registered for the "[EVENT NAME]" Event on [DAY, MONTH dd, yyyy].
+		</div>
+		<div class="confirmation" id="">
+			<div class="registrationTitle">
+				<h1>Confirmation Email Address</h1>
+			</div>
+			<div class="registrationDetails">Enter the email address below that you'd like to have your registration confirmation emailed to.</div>
+			<div style="padding-top:20px;padding-bottom:5px;">
+				<input type="text" style="width:200px;" class="registrationFormRequired" id="" maxlength="200" name="">
+			</div>
+			<div style="padding-bottom:20px"></div>
+		</div>
+		<div class="divCCProcessing" id="divCCRedirect"></div>
+		<!-- THE FOLLOWING BUTTONS APPEAR ON ALL REGISTRATION PAGES: -->
+		<div id="divRegisrationButtons" class="registrationButtons">
+			<input type="submit" class="smallText" id="" value="&lt; Back" name="">
+			<input type="submit" class="smallText" id="" value="Continue &gt;" name="">
+		</div>
+	</div>
+</div>
+*/
+
+
+.registrationProcessImage       /*Images that show the steps taken and remaining in the registration process.*/
+{
+}
+
+#registrationPage1              /*DIV containing all of the controls for registration page 1.*/
+{
+}
+
+#registrationPage2              /*DIV containing all of the controls for registration page 2.*/
+{
+}
+
+#registrationPage3              /*DIV containing all of the controls for registration page 3.*/
+{
+}
+
+#registrationPage4              /*DIV containing all of the controls for registration page 4.*/
+{
+}
+
+#registrationPage5              /*DIV containing all of the controls for registration page 5.*/
+{
+}
+
+.registrationPage              /*Class of the DIV containing all of the controls for all registration pages.*/
+{
+}
+
+.registrationTitle             /*Class of DIVs used as section headers within the registration pages.*/
+{
+}
+
+.registrationSummaryTitle      /*Additional class given to header DIV on registration summary page.*/
+{
+}
+
+.registrationEventTitle        /*Class of the Event Title on some registration pages.*/
+{
+}
+
+.registrationEventDates        /*Class of the Event Dates element.*/
+{
+        font-weight: bold;
+}
+
+.registrationEventCost         /*Class of the Event Cost element.*/
+{
+        font-weight: bold;
+        padding-bottom: 3px;
+}
+.registrationImage
+{
+        margin-bottom: 10px;
+}
+.registrationSmallText
+{
+        font-weight: bold;
+        font-style: italic;
+}
+
+.registrationDetails           /*Class of DIV containing registration form information.*/
+{
+	margin-bottom: 12px;
+}
+
+.registrationDetails   h1, 
+.confirmation .registrationTitle h1
+{
+	font-size: 150% !important;
+	border-top: solid 1px #C0C0C0 !important;
+	margin-top: 0 !important;
+	margin-bottom: 10px;
+}
+
+.registrationSummaryDetails    /*Additional class given to summary details DIV on summary page.*/
+{
+     font-weight: bold;
+     padding: 5px 0 5px 0;
+     font-style: italic;
+}
+
+.registrationHeading
+{
+}
+
+.registrationContent
+{
+}
+
+.registrationError, .registrationError *, .registrationError ul li, .errorText, .registrationMessage
+{
+    color: Red !important;
+}
+
+.registrationError, .registrationError *, .registrationError ul li
+{
+    font-weight: bold !important;
+}
+
+
+.registrationLabel              /*Class of SPANs used as labels for form elements on registration pages.*/
+{
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.registrationLabelRequired      /*Class of *required* SPANs used as labels for form elements on registration pages.*/
+{
+}
+
+.registrationDetails table tr td.registrationLabel, 
+.registrationDetails table tr td.registrationLabelRequired              /*Class of SPANs used as labels for form elements on registration pages.*/
+{
+	text-align: right;
+	font-weight: bold;
+	padding-right: 6px;
+	padding-bottom: 9px;
+	vertical-align: top;
+}
+
+.registrationDetails table tr td.registrationLabelRequired      /*Class of *required* SPANs used as labels for form elements on registration pages.*/
+{
+    /*
+	color: Blue;
+    */
+}
+
+.registrationForm               /*Class of form elements on registration pages and table cells that contain form elements.*/
+{
+     margin-bottom: 10px;
+}
+
+.registrationForm [type='checkbox'] /*Class of form elements on registration pages and table cells that contain form elements.*/
+{
+     display: block;
+     float: left;
+     clear: left;
+     position: relative;
+}
+
+label[for*='ctl05_ctl05_cb_']
+{
+     display: block;
+     float: left;
+ 
+}
+label[for*='ctl05_ctl04_cb_']
+{
+     display: block;
+     float: left;
+ 
+}
+select.registrationForm         /*Class of SELECT form element within registration form.*/
+{
+}
+
+input.registrationForm          /*Class of INPUT form element within registration form.*/
+{
+}
+
+.registrationCostFeesContainer  /*Class of DIV holding cost and fees information.*/
+{
+}
+.registrationParentCostsFeesContainer
+{
+     padding: 0 0 10px 0;
+     color: #336699;
+}
+.registrationCostTitle
+{
+     font-weight: bold;
+}
+.registrationCostTable
+{
+     color: #336699;
+}
+.registrationSubEventTitle
+{
+     font-weight: bold;
+     color: #336699;
+}
+.registrationSubEventDate
+{
+     font-weight: bold;
+     color: #336699;
+}
+.registrationSubEventContainer
+{
+     padding: 0 0 10px 0;
+}
+.registrationSubEventCostsFeesContainer
+{
+     color: #336699;
+}
+.registrationDiscountCode
+{
+     padding: 0 0 10px 0;
+     color: #336699
+}
+.registrationRunningTotalContainer
+{
+     padding: 0 0 10px 0;
+     background-color: #e6effe;
+     width: 150px;
+     vertical-align: middle;
+}
+
+#runningTotalLabel
+{
+	font-weight: bold;
+}
+
+.registrationRunningTotalLabel
+{
+}
+
+#runningTotalValue
+{
+     font-weight: bold;
+}
+
+.registrationRunningTotalValue
+{
+}
+.registrationStandardFieldTable
+{
+     margin: 5px 0 5px 0;
+}
+.registrationTotal
+{
+     background-color: #e6effe;
+}
+.confirmation                   /*Class of DIV holding confirmation information on summary page.*/
+{
+}
+
+.divCCProcessing
+{
+}
+
+.registrationDetails
+{
+	padding-top: 9px;
+}
+
+.registrationDetails table tr th
+{
+	text-align: right;
+	font-weight: bold;
+	padding-right: 6px;
+	padding-bottom: 9px;
+}
+
+.registrationDetails table tr td
+{
+	text-align: left;
+}
+
+.registrationSubEventItem
+{
+    display: block;
+    position: relative;
+    left: 12px;
+}
+
+.registrantSubEventItem
+{
+    display: block;
+    position: relative;
+    left: 12px;
+}
+.registrationSubEventDate
+{
+    display: block;
+    font-weight: bold;
+}
+.registrantSubEventName
+{
+    display: block;
+    font-weight: bold;
+    padding: 5px 0px 0px 5px;
+}
+/*Turn off link to add registrant when modifying a registration, does not work right*/
+#ctl03_ctl05_aAddRegistrant
+{
+    display: none;
+
+}
+#ctl03_ctl04_aAddRegistrant
+{
+    display: none;
+
+}

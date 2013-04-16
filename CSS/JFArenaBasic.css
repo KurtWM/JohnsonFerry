@@ -1,0 +1,92 @@
+@import url("/css/ArenaBasic.css");
+
+/***************Assignment Entry****************/
+
+.assignmentsForm input
+{
+     display: inline-block;
+     clear: left;
+     line-height: 15px;
+     height: 15px;
+}
+.assignmentsForm label
+{
+     display: block;
+     valign: bottom;
+     line-height: 15px;
+}
+.assignmentsFormPadded input
+{
+     display: inline-block;
+     float: left;
+     vertical-align: top;
+     line-height: 15px;
+}
+@-moz-document url-prefix() {
+.assignmentsFormPadded
+{
+     padding-left: 0px;    
+}
+}
+.assignmentsFormPadded label
+{
+     display: block;
+
+     line-height: 20px;
+}
+#pp_field_3962_delete, #pp_field_3962_button
+{
+     float: none;
+}
+#ctl07_ctl06_tbDescription
+{
+     height: 50px;
+}
+#ctl08_ctl06_cbAddToDetail
+{
+     display: none !important;
+}
+#ctl08_ctl06_cbPrivateNote
+{
+     display: none !important;
+}
+label[for='ctl08_ctl06_cbAddToDetail']
+{
+     display: none !important;
+}
+label[for='ctl08_ctl06_cbPrivateNote']
+{
+     display: none !important;
+}
+label[htmlfor='ctl08_ctl06_cbAddToDetail']
+{
+     display: none !important;
+}
+label[htmlfor='ctl08_ctl06_cbPrivateNote']
+{
+     display: none !important;
+}
+#ctl08_ctl05_cbAddToDetail
+{
+     display: none !important;
+}
+#ctl08_ctl05_cbPrivateNote
+{
+     display: none !important;
+}
+label[for='ctl08_ctl05_cbAddToDetail']
+{
+     display: none !important;
+}
+label[for='ctl08_ctl05_cbPrivateNote']
+{
+     display: none !important;
+}
+label[htmlfor='ctl08_ctl05_cbAddToDetail']
+{
+     display: none !important;
+}
+label[htmlfor='ctl08_ctl05_cbPrivateNote']
+{
+     display: none !important;
+}

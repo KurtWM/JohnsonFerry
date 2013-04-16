@@ -1,0 +1,104 @@
+/* Small Group Locator -- CSS Styles */
+
+/* .searchPanel is the class of the DIV that contains
+   the TABLE that holds the Small Group Locator search
+   selection controls. */
+.searchPanel
+{
+
+}
+
+.searchPanel input.smallText,
+.searchResults input.smallText
+{
+	display: block;
+	cursor: pointer;
+	width: 150px;
+	border: 1px solid #ccc;
+	padding: 2px 6px 2px;
+	margin: 12px 0 12px 0;
+	/*color: #999;*/
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 14px;
+	background: #ddd;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-moz-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	text-shadow: #fff 0px 1px 1px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+	background: -moz-linear-gradient(top,  #eeeeee,  #cccccc);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc');
+}
+
+.searchResults input.formItem
+{
+    margin-bottom: 6px;
+}
+
+/* .searchResults is the class of the DIV that contains
+   the TABLE (class = "list") that displays the results
+   of the Small Group search. */
+.searchResults
+{
+    margin-top: 18px;
+    width: 100%;
+}
+
+.searchResults table tr td
+{
+    vertical-align: top;
+}
+
+.searchResults table.list
+{
+    width: 100%;
+}
+
+.searchResults table.list tr.listHeader
+{
+
+}
+
+.searchResults table.list tr.listHeader td.listHeader
+{
+    text-align: left;
+}
+
+.searchResults table.list tr.listHeader td.listHeader a
+{
+
+}
+
+.searchResults table.list tr.listItem
+{
+
+}
+
+.searchResults table.list tr.listItem td
+{
+    font-size: 0.9375em;
+    text-align: left;
+}
+
+.searchResults table.list tr.listAltItem
+{
+
+}
+
+.searchResults table.list tr.listAltItem td
+{
+    font-size: 0.9375em;
+    text-align: left;
+}
+
+.smallGroupPageNav
+{
+    position: absolute;
+    left: 790px;
+}

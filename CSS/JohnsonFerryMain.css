@@ -1,0 +1,853 @@
+﻿@import url("/Custom/JohnsonFerry/CSS/960.css");
+@import url("/Custom/JohnsonFerry/CSS/reset.css");
+@import url("/Custom/JohnsonFerry/CSS/ResetCssMeyerweb.css");
+@import url("/Custom/JohnsonFerry/CSS/jquery-ui_revisedForJFBC.css");
+@import url("/Custom/JohnsonFerry/CSS/tabs-no-images.css");
+@import url("/Custom/JohnsonFerry/CSS/GCalOverride.css");
+@import url("/Custom/JohnsonFerry/CSS/ajaxcontroltoolkit/calendar/calendar.css");
+@import url("/Custom/JohnsonFerry/CSS/apycom_menu.css");
+@import url("/Custom/JohnsonFerry/CSS/menustyle_johnsonferry.css");
+
+body 
+{
+    background-color: #FFF; 
+    height: 100%; 
+    margin: 0; 
+    padding: 0;
+}
+
+body,th,td,div,p,table,
+h1,h2,h3,h4,h5,h6,
+.Normal,.NormalDisabled,
+.Head,.SubHead,.SubSubHead, 
+a:link, a:visited, a:hover, 
+input.formItem,
+.CommandButton,
+.DynamicForms_Label 
+{
+    color: #6e6f73; 
+    font: 13px Arial, FreeSans, Verdana, Helvetica, 'Liberation Sans', sans-serif;
+}
+
+p 
+{
+    margin-bottom: 2px;
+}
+td 
+{
+    text-align: left;
+    padding: 2px;
+    vertical-align: top;
+}
+.RightPane p 
+{
+    margin-bottom: 0;
+}
+
+.SidePane p 
+{
+    margin-bottom: 0;
+}
+
+a, a:link, a:visited, a:active {
+    color: #1E6195;
+    font-weight: normal;
+    text-decoration: none !important;
+}
+a:hover {
+    color: #000099;
+    text-decoration: underline;
+}
+
+h1, h2, h3, fieldset legend {color:#336699 !important;}
+
+h4{color:#5588bb !important;}
+
+h3, h4, h5, h6{font-weight:bold !important;}
+
+h1, h1, h2{font-weight:normal}
+
+h1, h1 {
+	font-size: 165%;
+}
+
+/* .ruleTop will be placed on the second and following modules in the ContentPane */
+h2, .ruleTop {
+	border-top: solid 1px #C0C0C0 !important;
+	margin-top: 0 !important;
+}
+
+/* .lower will be placed on the headers of the second and following modules in the ContentPane */
+h2, h1.lower {
+	font-size: 150% !important;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 14px;
+}
+
+h5 {
+	font-size: 1em;
+	font-style: italic;
+}
+
+h6 {
+	font-size: 1em;
+	font-style: italic;
+}
+b,strong  {
+        font-weight: bold;
+}
+em {
+        font-style: italic;
+}
+blockquote {
+        padding-left: 10px;
+}
+li { 
+        display: list-item;
+}
+ol {
+        list-style-type: decimal;
+        list-style-position: inside;
+}
+ul {
+        list-style-type: disc;
+        list-style-position: inside;
+}
+.pageContent 
+{
+    /*position: relative;
+    margin-top: 12px;*/
+}
+
+#JFLogo 
+{
+    position: relative;
+    top: 12px;
+    /*margin-top: 12px;*/
+}
+
+.siteNav 
+{
+    text-align: right;
+}
+
+
+/*===== siteNav area =========================*/
+.siteNav a, .siteNav a:link, siteNav a:visited, .siteNav a:hover {
+    font-size: 13px !important;
+    color: #6e6f73 !important;
+}
+
+.siteNav {
+    position: relative;
+    top: 78px;
+}
+
+.siteNav a.current 
+{
+    font-weight: bold;
+}
+
+/*===== topNavBar area =========================*/
+
+div.topNavBar 
+{
+     height: 24px; 
+}
+
+div.topNavBar ul 
+{
+    margin: 0;
+    float: right;
+}
+
+div.topNavBar>ul>li
+{
+    float: left;
+    list-style-type: none; 
+    text-align: center; 
+    text-transform: uppercase; 
+    font-size: 10px; 
+    color: White; 
+    padding: 0 12px 0 12px;
+    height: 24px;
+    margin: 0 0 0 4px !important;
+    border-top: solid 1px Transparent;
+    border-right: solid 1px Transparent;
+    border-left: solid 1px Transparent;
+}
+
+div.topNavBar ul li.selected
+{
+    background: transparent url(/Portals/0/images/site-graphics/navBarBackground.png) no-repeat center; 
+}
+
+div.topNavBar ul li.hilited
+{
+    border-top: solid 1px #3A7FCE;
+    border-right: solid 1px #3A7FCE;
+    border-left: solid 1px #3A7FCE;
+}
+
+div.topNavBar ul li a 
+{
+    position: relative;
+    top: 4px;
+    display: block;
+    color: White;
+    text-decoration: none;
+}
+
+/*===== pageHeader area =========================*/
+.pageHeader 
+{
+    position: relative;
+    top: 0;
+    background-color: #222B63;
+    height: 26px;
+    z-index: 100;
+    /*background: #141726 url(/portals/0/images/site-graphics/color-band-960x360px.jpg) no-repeat scroll -12px 0%; 
+    -moz-background-clip: -moz-initial; 
+    -moz-background-origin: -moz-initial; 
+    -moz-background-inline-policy: -moz-initial;*/ 
+}
+
+/*===== Pane style =========================*/
+.ContentPane, .TopPane, .BottomPane{ padding:0; margin:0; }
+
+.MainContentArea
+{
+    position: relative;
+}
+
+.MainContentAreaBackground
+{
+    background: url('images/grayPixel.gif') repeat-y 780px 0px; /*659px 0px;*/
+}
+/*===== Login Page =========================*/
+.loginTable *
+{
+    font-weight: bold;
+}
+/*===== My Account Page =========================*/
+.myRegistrations ul, .myMissions ul, .myServing ul, .myGroups ul
+{
+    list-style-type: none;
+}
+.myRegistrationsDetail
+{
+    margin: 5px 0 2px 0;
+}
+.myMissionsDetail
+{
+    margin: 5px 0 2px 0;
+}
+.myServingDetail
+{
+    margin: 5px 0 2px 0;
+}
+.myGroupsDetail
+{
+    margin: 5px 0 2px 0;
+}
+.myGroupMeetingInfo
+{
+    display: none;
+}
+.myGroupLeaderInfo
+{
+    font-weight: bold;
+}
+#ctl03_ctl11_rptGroups_ctl01_spNextMeeting, #ctl03_ctl11_rptGroups_ctl02_spNextMeeting, #ctl03_ctl11_rptGroups_ctl03_spNextMeeting,
+#ctl03_ctl11_rptGroups_ctl04_spNextMeeting, #ctl03_ctl11_rptGroups_ctl05_spNextMeeting
+{
+    display: none;
+}
+/*===== User Confirmation Pages =========================*/
+#ctl03_ctl05_tbl .formLabel
+{
+    text-align: right;
+}
+#ctl03_ctl05_tdFamily ul, #ctl05_ctl05_tdFamily ul
+{
+    width: 200px;
+    background-color: #e6effe;
+}
+#ctl03_ctl05_tdFamily .header
+{
+    display: none;
+}
+#ctl03_ctl05_tdFamily ul
+{
+    padding: 30px 0 0 10px;
+}
+/*===== My Giving Page =========================*/
+.myAttributes div div
+{
+    margin: 10px 0 30px 10px;
+    background-color: #F4F2F2;
+    width: 300px;
+    padding: 10px;
+}
+/*===== Mission Pages =========================*/
+#ctl03_ctl05_trAttribute_219 td, #ctl03_ctl05_trAttribute_206 td, #ctl03_ctl05_trAttribute_205 td, #ctl03_ctl05_trAttribute_207 td, 
+#ctl03_ctl05_trAttribute_208 td, #ctl03_ctl05_trAttribute_210 td, #ctl03_ctl05_trAttribute_228 td 
+{
+    background-color: #e6effe;
+}
+#ctl05_ctl05_trAttribute_219 td, #ctl05_ctl05_trAttribute_206 td, #ctl05_ctl05_trAttribute_205 td, #ctl05_ctl05_trAttribute_207 td, 
+#ctl05_ctl05_trAttribute_208 td, #ctl05_ctl05_trAttribute_210 td, #ctl05_ctl05_trAttribute_228 td 
+{
+    background-color: #e6effe;
+}
+/*===== Mission Pages =========================*/
+.tripRegistrationLabel, .tripRegistrationRequiredLabel
+{
+    vertical-align: top;
+    width: 250px;
+    text-align: right;
+}
+.tripRegistrationItem input
+{
+    vertical-align: top;
+    font-size: 14px;
+}
+/*===== Serving Opportunity & small group locator pages =========================*/
+#ctl03_ctl05_pnlSearch
+{
+    margin: 5px 0 0 10px;
+    background-color: #e6effe;
+    width: 400px;
+}
+.searchPanel table
+{
+    margin: 5px 0 0 10px;
+    background-color: #e6effe;
+}
+.searchPanel td
+{
+    padding: 5px;
+    color: #336699;
+}
+#ctl03_ctl07_textpart
+{
+    padding: 5px 0 0 10px;
+    width: 500px;
+    background-color: #e6effe;
+}
+
+/*===== Serving Opportunity pages =========================*/
+.searchSummary
+{
+    margin-top: 5px;
+    font-size: 125%;
+    font-style: italic;
+    color: #336699;
+}
+.searchSummary table
+{
+    background-color: #e6effe;
+    margin: 5px 30px 5px 0;
+}
+.searchSummary td
+{
+    color: #336699;
+}
+#ctl03_ctl04_lblCategory, #ctl03_ctl04_lblCommitment, #ctl03_ctl04_lblTimeframe, #ctl03_ctl04_lblType, #ctl03_ctl04_lblDuration
+{
+    font-weight: bold;
+}
+.ResultListHeader td
+{
+    font-weight: bold;
+    background-color: #e6effe;
+}
+.ResultListAltItem td
+{
+    background-color: #efefef;
+}
+#ctl03_ctl05_imgServing
+{
+    width: 300px;
+    height: 200px;
+    border: 2px outset #336699;
+    float: right;
+}
+
+.ServingOppDescription, .ServingOppExperience
+{
+    color: #0a2a5d;
+    width: 450px;
+    float: left;
+    padding: 5px 0px 5px 0px;
+}
+.ServingOppSchedule
+{
+    margin: 5px 0 5px 0;
+    width: 450px;
+    float: left;
+}
+.ServingOppContaceInfo
+{
+    padding-top: 2px;
+    width: 450px;
+    float: left;
+}
+
+.ServingButtons
+{
+    clear: both;
+}
+/*===== Churchwide Enews =========================*/
+.newsletterVolumePromotionWrapper
+{
+    padding-bottom: 10px;
+}
+.newsletterVolumePromotionTitle, .NewsletterPromotionHeader
+{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px 0px 5px 0px;
+    line-height: 150%;
+    background-color: #e6effe;
+}
+.newsletterVolumePromotionImage
+{
+    display: block;
+    float: left;
+    margin: 0px 10px 10px 0px;
+}
+.newsletterVolumePromotionTextTitle, .newsletterSubscriptionText
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+.newsletterVolumePromotionList a
+{
+    font-size: 14px;
+}
+.newsletterBodyArticles
+{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 150%;
+    clear: both;
+}
+.NewsletterPromotionTitle
+{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 150%;
+}
+.NewsletterPromotionLink
+{
+    padding-bottom: 10px;
+}    
+.newsletterArchiveSearchText
+{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 150%;
+    background-color: #e6effe;
+}
+.newsletterArchiveFormTableCell
+{
+    text-align: center;
+}
+
+.subscribeForm
+{
+    margin: 5px 0px 10px 0px;
+}
+.subscribeForm input, label
+{
+    padding: 3px;
+}
+.subscribeResponse
+{
+    color: red;
+}
+.newsletterArticleDisplayImage
+{
+    display: block;
+    float: right;
+    margin: 0px 0px 10px 10px;
+}    
+#newsletterArticleDisplayBody .author
+{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 150%;
+}
+#newsletterArticleDisplayBody
+{
+    margin: 10px 5px 10px 0px;
+}
+.newsletterArticleDisplayBioName
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+.newsletterArticleDisplayBioSummary
+{
+    font-size: 12px;
+    font-weight: bold;
+}
+#ctl03_ctl03_pnlScore
+{
+    margin: 20px 0px 20px 0px;
+}
+#ctl03_ctl03_lblScoreQuestion
+{
+    font-size: 12px;
+    font-weight: bold;
+    font-style: italic;
+}
+.newsletterArchiveResultsCellImage img
+{
+    height: 75px;
+    width: 75px;
+}
+.newsletterArchiveResultsCellTextContents
+{
+    width: 30%;
+}
+.newsletterArchiveResultsCellText span
+{
+    font-size: 12px;
+    font-weight: bold;
+}
+#ctl03_ctl05_pnlContent .boldText
+{
+    font-size: 16px;
+    font-weight: bold; 
+}  
+/*===== bottom menu area ====================*/
+.bottom_menu_container 
+{
+    background-color: #FFFFFF;
+    margin-top: 0; /*9px;*/ /*-30px;*/ /*16px;*/
+    margin-bottom: -25px;
+    border-top: solid 2px #9ea0a2;
+    border-bottom: solid 2px #9ea0a2;
+    min-height: 30px;
+}
+
+.bm_links_container {
+    margin-top: 20px;
+}
+
+.bm_column {
+
+}
+
+.bm_header {
+    font-size: 13px;
+    color: #222b63;
+    font-weight: bold;
+}
+
+.bm_links {
+}
+
+.bm_link a {
+    font-size: 11px;
+    color: #6e6f73;
+    white-space: nowrap;
+}
+
+/*===== bottom menu area ====================*/
+#footerText {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.footer-area
+{
+    background-color: #FFFFFF;
+}
+
+.footer-contact-info
+{
+    margin-bottom: 18px;
+}
+/*-------------------------------------------*/
+
+
+.clear_float{clear:both; line-height:0; font-size:0; height:0;}
+
+/* Override Arena default CSS */
+.logWrap {
+    bottom: 0;
+    color: inherit;
+    display: inline;
+    font-size: inherit;
+    padding: 0;
+    position: relative;
+}
+
+.errorText, .error, .alert 
+{
+    color: Red;
+    font-style: italic;
+    padding-left: 3px;
+}
+
+.MultiPage
+{
+    width: 640px !important;
+}
+
+.MultiPage .PageContent
+{
+    /*width: 98%;
+    margin-right: auto;
+    margin-left: auto;*/
+}
+
+td.formLabel
+{
+    font-weight: bold;
+    padding-right: 12px;
+}
+
+.MultiPage table.list
+{
+    width: 100%
+}
+
+td.listHeader, td.listHeader a
+{
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+table.list tr td
+{
+    padding: 0px 0px 0px 12px;
+}
+
+.contributionList .listFilter
+{
+    margin-bottom: 18px;
+}
+
+.givingWizard input.nextButton, 
+.givingWizard input.previousButton, 
+.givingWizard input.cancelButton, 
+.givingWizard input.finishButton, 
+.repeatingPaymentItem input.edit, 
+.repeatingPaymentItem input.delete 
+{
+	width: 100px;
+	border: 1px solid #ccc;
+	padding: 2px 6px 2px;
+	margin: 12px 6px 12px 6px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 14px;
+	background: #ddd;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-moz-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	text-shadow: #fff 0px 1px 1px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+	background: -moz-linear-gradient(top,  #eeeeee,  #cccccc);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc');
+}
+
+#FinishLabel
+{
+    display: block;
+}
+
+/* Force default header for My Registrations module to be hidden... */
+div.myRegistrations h3 
+{
+    display: none;
+}
+
+/* ...but not the ones for the event titles */
+div.myRegistrationsDetail h3 
+{
+    display: block;
+}
+
+.AdminNavigation
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Make RadEditor float in front */
+.reWrapper 
+{
+    position: relative;
+    z-index: 200 !important;
+}
+
+
+/* Begin: Data Grid Styles */
+.list
+{
+	border-top: solid 1px #B1B1B1;
+	border-bottom: solid 1px #B1B1B1;
+	width: 100%;
+	clear: both;
+}
+.listFilter
+{
+	background-color: #F4F2F2;
+}
+.listHeader
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	font-weight: bold;
+	color: #494747;
+	vertical-align: bottom;
+	border-bottom: solid 1px #C1BFBF;
+	background-color: #ffffff;
+	background-image: url(/images/datagrid_header_background.jpg);
+	background-repeat: repeat-x;
+}
+.listHeader a
+{
+	color: #494747;
+}
+.listItem
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	background-color: #F4F2F2;
+}
+.listItem:hover
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	background-color: #E8E5E5;
+}
+.listEditItem
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	background-color: #F4F2F2;
+}
+.listAltItem
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+.listAltItem:hover
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	background-color: #E8E5E5;
+}
+.listItemText
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #000000;
+	white-space: normal;
+}
+.listItemTextInactive
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #999999;
+}
+.listItemWithSeperator
+{
+	border-left: solid 1px #B1B1B1;
+}
+.listItemMouseOver
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	color: #FFFFFF;
+	background-color: #738EC5;
+}
+.listPager
+{
+	/*font-family: Tahoma, Arial, Helvetica;*/
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	background-color: #F7F6F6;
+	background-image: url(/images/datagrid_pager_background.jpg);
+	background-position: bottom;
+	background-repeat: repeat-x;
+	vertical-align: bottom;
+}
+.listPagerItem
+{
+	margin-right: 12px;
+}
+.listFooter
+{
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	font-size: 10px;
+	color: #4C4D4D;
+	line-height: 20px;
+	text-decoration: none;
+}
+/* End: Data Grid Styles */
+
+/* Begin: Person Popup Styles */
+.personPopupImage
+{
+    vertical-align: text-top;
+}
+
+#personPopupContent table tr td table
+{
+    width: 300px;
+}
+input.btnStyle, a.btnStyle, input.cancelButton, input.registrationButtons, input.nextButton, input.previousButton, input.finishButton,
+ #ctl03_ctl05_btnNext, #ctl03_ctl05_btnBack, input.cmdButton
+{
+    /*background: -moz-linear-gradient(center top , #EEEEEE, #CCCCCC) repeat scroll 0 0 transparent;*/
+    background-color: #F0F0F0;
+    color: #1E6195;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 4px 4px 4px 4px;
+    /*box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);*/
+    display: inline;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    margin: 9px 0;
+    padding: 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #FFFFFF;
+    cursor: pointer;
+    min-width: 100px;
+    /*width: 100px;*/
+}
+
+a.btnStyle
+{
+    padding: 3px 6px;
+    margin: 12px 0;
+}
+/* End: Person Popup Styles */

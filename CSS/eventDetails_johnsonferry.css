@@ -1,0 +1,123 @@
+H1
+{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight:bold;
+	color:#ff4000;
+}
+.eventDetailWrap
+{
+}
+
+.promotionImage
+{
+	display: block; /* forces line break for content after */
+	padding-bottom: 5px;
+}
+
+.eventDetails
+{
+	padding-top: 9px;
+	margin-bottom: 24px;
+}
+
+.eventDetails table tr th
+{
+	text-align: right;
+	font-weight: bold;
+        vertical-align: top;
+	padding-right: 6px;
+	padding-top: 9px;
+}
+
+.eventDetails table tr td
+{
+	text-align: left;
+	padding-right: 6px;
+	padding-top: 9px;
+        vertical-align: top;
+}
+
+.Email
+{
+        margin-top: -3px;
+}
+
+.registerButton /*DIV element containing the Register link or button*/
+{
+}
+
+/*
+.registerButton a.button
+{
+	display: block;
+	width: 150px;
+	border: 1px solid #ccc;
+	padding: 2px 6px 2px;
+	margin: 12px 0 12px 0;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 14px;
+	background: #ddd;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	-moz-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	text-shadow: #fff 0px 1px 1px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+	background: -moz-linear-gradient(top,  #eeeeee,  #cccccc);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc');
+}
+*/
+
+/********** begin: SOCIAL MEDIA LINKS SECTION ***********************/
+
+.share-event     /*DIV element containing social media links          */
+{
+	margin-top: 12px;
+}
+
+.share-event ul.social li
+{
+	display: inline;
+	margin-right: 6px;
+}
+
+h3.social
+{
+}
+
+.share-event h3.social
+{
+	display: inline;
+	margin-right: 3px;
+}
+
+ul.social
+{
+}
+
+.share-event ul.social
+{
+	display: inline;
+}
+
+ul.social li a.facebook
+{
+}
+
+ul.social li a.twitter
+{
+}
+
+ul.social li a.email
+{
+}
+
+/********** end: SOCIAL MEDIA LINKS SECTION *************************/
+
+
