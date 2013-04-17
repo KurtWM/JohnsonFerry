@@ -16,105 +16,200 @@ using Arena.Portal.UI;
 using Arena.Security;
 using Arena.Exceptions;
 using Arena.Core;
+using Arena.Marketing;
 using Arena.DataLayer.Core;
+using Arena.DataLayer.Marketing;
 
 namespace ArenaWeb.Custom.JohnsonFerry.UserControls
 {
 
   public partial class EventRegistrationList : PortalControl
   {
-    [PageSetting("Detail Page", "The page to use for displaying the event details.", true)]
-    public string PageIDSetting { get { return Setting("PageID", "", false); } }
+    protected bool eventsOnly;
 
-    //[BooleanSetting("List All Current Events When No Topic Area ID is Provided", "Flag indicating whether to list all current events, regardless of Topic Area, when no Topic Area is specified in the module Settings or in the URL QueryString. Defaults to false and should be left to false in most cases.", true, false)]
-    //public bool ListAllEnabledSetting { get { return Convert.ToBoolean(Setting("ListAllEnabled", "false", true)); } }
+    [PageSetting("Detail Page", "The page that should be used to display promotion details.", true)]
+    public string DetailPageSetting
+    {
+      get
+      {
+        return this.Setting("DetailPage", "", true);
+      }
+    }
 
-    [ListFromSqlSetting("Topic Areas", "List of various ministries.", false, "", "SELECT lookup_id, lookup_value FROM core_lookup WHERE lookup_type_id = 69 AND active = 1 AND organization_id = 1 ORDER BY lookup_value", ListSelectionMode.Multiple)]
-    public string TopicAreaIDSetting { get { return Setting("TopicAreaID", "", false); } }
+    [PageSetting("Event Detail Page", "The page that should be used to display event details.", true)]
+    public string EventDetailPageSetting 
+    { 
+      get 
+      { 
+        return Setting("EventDetailPage", "", false); 
+      } 
+    }
+
+    [ListFromSqlSetting("Topic Area ID", "The Topic Area IDs that should be used to filter promotions.", false, "", "SELECT lookup_id, lookup_value FROM core_lookup WHERE lookup_type_id = 69 AND active = 1 AND organization_id = 1 ORDER BY lookup_value", ListSelectionMode.Multiple)]
+    public string TopicAreaIDSetting 
+    { 
+      get 
+      { 
+        return Setting("TopicAreaID", "", false); 
+      } 
+    }
 
     [ListFromSqlSetting("Dateless Event Types", "List of Event Types for which a start date is irrelevant. The start date for these Event Types will not be displayed.", false, "", "SELECT lookup_id, lookup_value FROM core_lookup WHERE lookup_type_id = 46 AND active = 1 AND organization_id = 1 ORDER BY lookup_value", ListSelectionMode.Multiple)]
-    public string DatelessEventTypeIDSetting { get { return Setting("EventTypeID", "", false); } }
+    public string DatelessEventTypeIDSetting 
+    { 
+      get 
+      { 
+        return Setting("EventTypeID", "", false); 
+      } 
+    }
+
+    [CustomListSetting("Area Filter", "Filter flag for area.", false, "primary", new string[] { "primary", "secondary", "both", "home" }, new string[] { "primary", "secondary", "both", "home" })]
+    public string AreaFilterSetting
+    {
+      get
+      {
+        return this.Setting("AreaFilter", "primary", false);
+      }
+    }
 
     [ListFromSqlSetting("Event Types to Display", "List of Event Types to be displayed.", false, "", "SELECT lookup_id, lookup_value FROM core_lookup WHERE lookup_type_id = 46 AND active = 1 AND organization_id = 1 ORDER BY lookup_value", ListSelectionMode.Multiple)]
-    public string DisplayEventTypeIDSetting { get { return Setting("DisplayEventTypeID", "", false); } }
+    public string DisplayEventTypeIDSetting 
+    { 
+      get 
+      { 
+        return Setting("DisplayEventTypeID", "", false); 
+      } 
+    }
+
+    [NumericSetting("Max Items", "The maximum number of promotions to display (default = 6).", false)]
+    public string MaxItemsSetting
+    {
+      get
+      {
+        return this.Setting("MaxItems", "6", false);
+      }
+    }
+
+    [BooleanSetting("EventsOnly", "Flag indicating if only promotions tied to an event should be displayed.", false, false)]
+    public string EventsOnlySetting
+    {
+      get
+      {
+        return this.Setting("EventsOnly", "false", false);
+      }
+    }
 
     [TextSetting("List Header", "The header for this list.", false)]
-    public string HeaderSetting { get { return Setting("Header", "", false); } }
+    public string HeaderSetting 
+    { 
+      get 
+      { 
+        return Setting("Header", "", false); 
+      } 
+    }
 
     [TextSetting("Hidden Date Text", "The text to show when an event's date is hidden. Default is no text.", false)]
-    public string HiddenDateSetting { get { return Setting("HiddenDate", "", false); } }
+    public string HiddenDateSetting 
+    { 
+      get 
+      { 
+        return Setting("HiddenDate", "", false); 
+      } 
+    }
 
-    //[NumericSetting("Max Days Before Date is Hidden", "Some events are set up to be ongoing for a long period of time. This makes the date value for the event appear misleading in the list. Enter the maximum number of days that an occurrence can last before the date value will be removed from the list. Defaults to 14 days.", false)]
-    //public string MaxDaysSetting { get { return Setting("MaxDays", "14", false); } }
+    [CssSetting("Css File", "An optional CSS File to use for this module.", false)]
+    public string CssFileSetting
+    {
+      get
+      {
+        return this.Setting("CssFile", "", false);
+      }
+    }
 
+    [CampusSetting("Campus Filter", "The campus to filter promotions for.", false)]
+    public string CampusSetting
+    {
+      get
+      {
+        return this.Setting("Campus", "", false);
+      }
+    }
 
     public bool TopicAreaIDIsEmpty = true;
     public bool luidIsEmpty = true;
     public string strTopicAreas;
     public string errMsg = "";
     public string cssStr;
-    //public string[] datelessEventTypes;
-    //public string[] displayEventTypes;
     public int iTopicAreaNum = 0;
     public bool DisplayEventType = true;
 
-    //  protected void Page_PreRender(object sender, EventArgs e)
-    //{
-    //      if (DatelessEventTypeIDSetting.Length > 0)
-    //      {
-    //        datelessEventTypes = DatelessEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-    //      }
-
-    //      if (DisplayEventTypeIDSetting.Length > 0)
-    //      {
-    //        displayEventTypes = DisplayEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-    //      }
-    //}
 
     protected void Page_Load(object sender, EventArgs e)
     {
-      cssStr = "<style type='text/css'>.TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;}</style>";
-      TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
-      luidIsEmpty = (Request.QueryString["luid"] == null);
-
-      if (!TopicAreaIDIsEmpty) //if there is a LookupID set for this module instance it takes priority.
+      if (this.Request["promotionID"] != null)
+        this.Response.Redirect(new PromotionRequest(int.Parse(this.Request["promotionID"])).DetailUrl(this.Request, this.DetailPageSetting, this.EventDetailPageSetting), true);
+      int maxItems = 6;
+      try
       {
-        strTopicAreas = TopicAreaIDSetting;
+        maxItems = int.Parse(this.MaxItemsSetting);
       }
-      else if (!luidIsEmpty) //else if there is an "luid" QueryString value, use it instead.
+      catch
       {
-        strTopicAreas = Request.QueryString["luid"];
       }
-      else
+      this.eventsOnly = this.EventsOnlySetting.ToLower() == "true";
+      string script = "";
+      if (this.CssFileSetting != string.Empty)
+        script = "<link href=\"" + this.Request.ApplicationPath + "/css/" + this.CssFileSetting + "\" type=\"text/css\" rel=\"stylesheet\" />";
+      this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "promotionCss", script);
+      int campusID = -1;
+      if (this.CampusSetting != string.Empty)
       {
-        strTopicAreas = "";
-        DefaultHeader.Visible = true;
-        //if (!ListAllEnabledSetting)
-        //{
-        //    errMsg = "<p class=\"errorText\">There are no valid events to show. No valid Lookup ID has been provided.</p>";
-        //    RegistrationRepeater.Visible = false;
-        //}
-
+        try
+        {
+          campusID = int.Parse(this.CampusSetting);
+        }
+        catch
+        {
+        }
       }
+      this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, maxItems, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
+      this.RegistrationRepeater.DataBind();
 
-      if (HeaderSetting.Trim().Length > 0)
-      {
-        DefaultHeader.Text = HeaderSetting;
-      }
+      //cssStr = "<style type='text/css'>.TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;}</style>";
+      //TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
+      //luidIsEmpty = (Request.QueryString["luid"] == null);
 
-      BindRegistrationRepeater(RegistrationRepeater, "evnt_sp_JFBC_get_eventLiveList_ministryOption3", strTopicAreas, "@TopicAreas");
+      //if (!TopicAreaIDIsEmpty) //if there is a LookupID set for this module instance it takes priority.
+      //{
+      //  strTopicAreas = TopicAreaIDSetting;
+      //}
+      //else if (!luidIsEmpty) //else if there is an "luid" QueryString value, use it instead.
+      //{
+      //  strTopicAreas = Request.QueryString["luid"];
+      //}
+      //else
+      //{
+      //  strTopicAreas = "";
+      //  DefaultHeader.Visible = true;
+      //}
 
-      ErrorMsg.Text = errMsg;
+      //if (HeaderSetting.Trim().Length > 0)
+      //{
+      //  DefaultHeader.Text = HeaderSetting;
+      //}
 
-      //string[] items;
-      if (strTopicAreas.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length == 1)
-      {
-        cssLiteral.Text = cssStr;
-      }
-      else
-      {
-        cssLiteral.Text = "";
-      }
+      //BindRegistrationRepeater(RegistrationRepeater, "evnt_sp_JFBC_get_eventLiveList_ministryOption3", strTopicAreas, "@TopicAreas");
+
+      //ErrorMsg.Text = errMsg;
+
+      //if (strTopicAreas.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length == 1)
+      //{
+      //  cssLiteral.Text = cssStr;
+      //}
+      //else
+      //{
+      //  cssLiteral.Text = "";
+      //}
     }
 
     /// <summary>
@@ -177,179 +272,56 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       // Execute the following logic for Items and Alternating Items.
       if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
       {
-        System.Data.Common.DbDataRecord rd = (System.Data.Common.DbDataRecord)e.Item.DataItem;
-
-        CheckForDatelessEventTypes(e, rd);
-
-        if (DisplayEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length > 0)
+        int intPromoId;
+        bool result = Int32.TryParse(((DataRowView)e.Item.DataItem)["promotion_request_id"].ToString(), out intPromoId);
+        if (result)
         {
-          e.Item.Visible = ItemIsEventType(e, rd);
+          SqlDataReader PromoSqlDataReader = new PromotionRequestData().GetPromotionRequestByID(intPromoId, ArenaContext.Current.Organization.OrganizationID);
+          //PromoSqlDataReader.Close();
+          //if (!PromoSqlDataReader.IsDBNull(PromoSqlDataReader.GetOrdinal("web_start_date")))
+          //{
+          int intWebStartDateColumn = PromoSqlDataReader.GetOrdinal("web_start_date");
+          if (PromoSqlDataReader.HasRows)
+          {
+            while (PromoSqlDataReader.Read())
+            {
+              ((Label)e.Item.FindControl("StartDateLabel")).Text = PromoSqlDataReader.GetDateTime(intWebStartDateColumn).ToShortDateString(); // "<b>***Good***</b>";
+            }
+          }
+          PromoSqlDataReader.Close();
+          //}
+
+    //    System.Data.Common.DbDataRecord rd = (System.Data.Common.DbDataRecord)e.Item.DataItem;
+
+    //    CheckForDatelessEventTypes(e, rd);
+
+    //    if (DisplayEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length > 0)
+    //    {
+    //      e.Item.Visible = ItemIsEventType(e, rd);
+    //    }
         }
+
       }
     }
 
-    protected void CheckForDatelessEventTypes(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
-    {
-      string[] datelessEventTypes = DatelessEventTypeIDSetting.Split(',');
-      String type_luid = (rd)["type_luid"].ToString();
+    //protected void CheckForDatelessEventTypes(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
+    //{
+    //  string[] datelessEventTypes = DatelessEventTypeIDSetting.Split(',');
+    //  String type_luid = (rd)["type_luid"].ToString();
 
-      if (datelessEventTypes.Contains(type_luid))
-      {
-        ((Label)e.Item.FindControl("DateLabel")).Text = HiddenDateSetting;
-      }
+    //  if (datelessEventTypes.Contains(type_luid))
+    //  {
+    //    ((Label)e.Item.FindControl("DateLabel")).Text = HiddenDateSetting;
+    //  }
+    //}
 
-      //foreach (string eventType in datelessEventTypes)
-      //{
-      //  if (eventType.Trim() == type_luid.Trim())
-      //  {
-      //    ((Label)e.Item.FindControl("DateLabel")).Text = HiddenDateSetting;
-      //    break;
-      //  }
-      //}
-    }
+    //protected bool ItemIsEventType(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
+    //{
+    //  string[] displayEventTypes = DisplayEventTypeIDSetting.Split(',');
+    //  String type_luid = (rd)["type_luid"].ToString();
 
-    protected bool ItemIsEventType(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
-    {
-      string[] displayEventTypes = DisplayEventTypeIDSetting.Split(',');
-      String type_luid = (rd)["type_luid"].ToString();
+    //  return displayEventTypes.Contains(type_luid);
 
-      return displayEventTypes.Contains(type_luid);
-
-      //foreach (string eventType in displayEventTypes)
-      //{
-      //  if (eventType.Trim() == type_luid.Trim())
-      //  {
-      //    DisplayEventType = true;
-      //  }
-      //  else
-      //  {
-      //    DisplayEventType = false;
-      //    break;
-      //  }
-      //}
-      //return DisplayEventType;
-    }
-
-
-    public class Evaluation
-    {
-      private string profile_id;
-      private string lookup_id;
-      private string lookup_value;
-      private string profile_name;
-      private string profile_desc;
-      private string details;
-      private string start;
-      private string end;
-      private string contact_name;
-      private string contact_phone;
-      private string contact_email;
-
-      public Evaluation(string profile_id, string lookup_id, string lookup_value, string profile_name, string profile_desc, string details, string start, string end, string contact_name, string contact_phone, string contact_email)
-      {
-        this.profile_id = profile_id;
-        this.lookup_id = lookup_id;
-        this.lookup_value = lookup_value;
-        this.profile_name = profile_name;
-        this.profile_desc = profile_desc;
-        this.details = details;
-        this.start = start;
-        this.end = end;
-        this.contact_name = contact_name;
-        this.contact_phone = contact_phone;
-        this.contact_email = contact_email;
-      }
-
-      public string ProfileID
-      {
-        get
-        {
-          return profile_id;
-        }
-      }
-
-      public string LookupID
-      {
-        get
-        {
-          return lookup_id;
-        }
-      }
-
-      public string LookupValue
-      {
-        get
-        {
-          return lookup_value;
-        }
-      }
-
-      public string ProfileName
-      {
-        get
-        {
-          return profile_name;
-        }
-      }
-
-      public string ProfileDesc
-      {
-        get
-        {
-          return profile_desc;
-        }
-      }
-
-      public string Details
-      {
-        get
-        {
-          return details;
-        }
-      }
-
-      public string Start
-      {
-        get
-        {
-          return start;
-        }
-      }
-
-      public string End
-      {
-        get
-        {
-          return end;
-        }
-      }
-
-      public string ContactName
-      {
-        get
-        {
-          return contact_name;
-        }
-      }
-
-      public string ContactPhone
-      {
-        get
-        {
-          return contact_phone;
-        }
-      }
-
-      public string ContactEmail
-      {
-        get
-        {
-          return contact_email;
-        }
-      }
-    }
-
-
-
+    //}
   }
 }

@@ -6,13 +6,6 @@
 <asp:Literal ID="cssLiteral" runat="server"></asp:Literal>
 
 <h1><asp:Literal ID="DefaultHeader" runat="server" Text="Johnson Ferry Event Registration"></asp:Literal></h1>
-<!--<asp:Repeater ID="TopicRepeater" runat="server">
-    <ItemTemplate>
-        <h2><%# Eval("lookup_value")%> Event Registration</h2>
-    </ItemTemplate>
-</asp:Repeater>
--->
-
 <asp:Label ID="ErrorMsg" runat="server"></asp:Label>
 <asp:Label ID="SimpleMsg" runat="server"></asp:Label>
 <asp:Repeater ID="RegistrationRepeater" runat="server" OnItemDataBound="RegistrationRepeater_ItemDataBound">
@@ -33,29 +26,29 @@
             <td valign="top" align="center">
                 <asp:ImageButton ID="AboutBtn" runat="server" 
                     CausesValidation="false" 
-                    OnClientClick='<%# "$.blockUI({ message: $(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "profile_id") + "\"), css: { width: \"275px\"} }); return false;" %>' 
+                    OnClientClick='<%# "$.blockUI({ message: $(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "promotion_request_id") + "\"), css: { width: \"275px\"} }); return false;" %>' 
                     ImageUrl="/images/information2.gif" />
-                <div id='eventdetail<%# DataBinder.Eval(Container.DataItem, "profile_id") %>' style="display: none; cursor: default;">
+                <div id='eventdetail<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>' style="display: none; cursor: default;">
                     <div style="background-color: #D6DEDE; border: none; text-align: left; padding-top: 3px;">
                     <p style="margin-left: 3px; position: relative; float: left; font-weight: bold;">Event Information</p>
                     <div class="closeBlockUI" style="background: Transparent url(/Custom/JohnsonFerry/Images/ui-icons_217bc0_256x240.png) no-repeat -100px -132px; width: 14px; height: 14px; margin: 4px 3px; position: relative; float: right;"></div>
                     <div style="clear: both;"></div></div>
                     <div style="background-color: White;">
                         <div style="text-align: left; margin: 9px;">
-                            <h3><%# Eval("profile_name")%></h3>
-                            <p><%# Eval("profile_desc")%></p>
-                            <p><%# Eval("details")%></p>
+                            <h3><%# DataBinder.Eval(Container.DataItem, "title") %></h3>
+                            <p><%# DataBinder.Eval(Container.DataItem, "web_summary") %></p>
+                            <p><strong><a href="default.aspx?page=<%=CurrentPortalPage.PortalPageID.ToString()%>&promotionId=<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>">Learn More</a></strong></p>
                         </div>
                         <div style="clear: both;"></div>
                     </div>
                 </div>
             </td>
             <td class="TopicColumn_<%# this.UniqueID.Replace("$", String.Empty) %>">
-                <%# Eval("lookup_value")%></td> 
+                [ministry]</td> 
             <td>
-                <strong><a href="/default.aspx?page=<%# PageIDSetting %>&eventId=<%# Eval("profile_id")%>"><%# Eval("profile_name")%></a></strong></td>
+                <strong><a href="default.aspx?page=<%=CurrentPortalPage.PortalPageID.ToString()%>&promotionId=<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>"><%# DataBinder.Eval(Container.DataItem, "title") %> </a></strong></td>
             <td style="text-align: right;">
-                <asp:Label id="DateLabel" Text='<%# DataBinder.Eval(Container.DataItem, "start", "{0:d}")%>' Runat="server"/></td> 
+                <asp:Label id="StartDateLabel" Text='[date]' Runat="server"/></td> 
         </tr>
     </ItemTemplate>
     <FooterTemplate>
