@@ -16,6 +16,7 @@ using Arena.Portal.UI;
 using Arena.Security;
 using Arena.Exceptions;
 using Arena.Core;
+using Arena.Event;
 using Arena.Marketing;
 using Arena.DataLayer.Core;
 using Arena.DataLayer.Marketing;
@@ -26,6 +27,7 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
   public partial class EventRegistrationList : PortalControl
   {
     protected bool eventsOnly;
+    private EventProfile _eventProfile;
 
     [PageSetting("Detail Page", "The page that should be used to display promotion details.", true)]
     public string DetailPageSetting
@@ -277,15 +279,22 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
         if (result)
         {
           SqlDataReader PromoSqlDataReader = new PromotionRequestData().GetPromotionRequestByID(intPromoId, ArenaContext.Current.Organization.OrganizationID);
+          
           //PromoSqlDataReader.Close();
           //if (!PromoSqlDataReader.IsDBNull(PromoSqlDataReader.GetOrdinal("web_start_date")))
           //{
-          int intWebStartDateColumn = PromoSqlDataReader.GetOrdinal("web_start_date");
+          int intWebStartDateColumn = PromoSqlDataReader.GetOrdinal("event_id");
           if (PromoSqlDataReader.HasRows)
           {
             while (PromoSqlDataReader.Read())
             {
-              ((Label)e.Item.FindControl("StartDateLabel")).Text = PromoSqlDataReader.GetDateTime(intWebStartDateColumn).ToShortDateString(); // "<b>***Good***</b>";
+              if (!PromoSqlDataReader.IsDBNull(intWebStartDateColumn))
+              {
+                EventProfile eventProfile1 = new EventProfile(PromoSqlDataReader.GetInt32(intWebStartDateColumn));
+
+                ((Label)e.Item.FindControl("StartDateLabel")).Text = DateTimeExtensions.ToShortDateTimeString(eventProfile1.Start, true); // = PromoSqlDataReader.GetInt32(intWebStartDateColumn).ToString(); // "<b>***Good***</b>";
+                //((Label)e.Item.FindControl("StartDateLabel")).Text = PromoSqlDataReader.GetDateTime(intWebStartDateColumn).ToShortDateString(); // "<b>***Good***</b>";
+              }
             }
           }
           PromoSqlDataReader.Close();
