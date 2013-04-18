@@ -23,7 +23,6 @@ using Arena.DataLayer.Marketing;
 
 namespace ArenaWeb.Custom.JohnsonFerry.UserControls
 {
-
   public partial class EventRegistrationList : PortalControl
   {
     protected bool eventsOnly;
@@ -60,8 +59,8 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
     public string DatelessEventTypeIDSetting 
     { 
       get 
-      { 
-        return Setting("EventTypeID", "", false); 
+      {
+        return Setting("DatelessEventTypeID", "", false); 
       } 
     }
 
@@ -142,15 +141,48 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
     public string strTopicAreas;
     public string errMsg = "";
     public string cssStr;
-    public int iTopicAreaNum = 0;
-    public bool DisplayEventType = true;
-
 
     protected void Page_Load(object sender, EventArgs e)
     {
       if (this.Request["promotionID"] != null)
+      {
         this.Response.Redirect(new PromotionRequest(int.Parse(this.Request["promotionID"])).DetailUrl(this.Request, this.DetailPageSetting, this.EventDetailPageSetting), true);
+      }
+
       int maxItems = 6;
+      cssStr = "<style type='text/css'>.TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;}</style>";
+
+      TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
+      luidIsEmpty = (Request.QueryString["luid"] == null);
+
+      if (!TopicAreaIDIsEmpty) //if there is a LookupID set for this module instance it takes priority.
+      {
+        strTopicAreas = TopicAreaIDSetting;
+      }
+      else if (!luidIsEmpty) //else if there is an "luid" QueryString value, use it instead.
+      {
+        strTopicAreas = Request.QueryString["luid"];
+      }
+      else
+      {
+        strTopicAreas = "";
+        DefaultHeader.Visible = true;
+      }
+
+      if (HeaderSetting.Trim().Length > 0)
+      {
+        DefaultHeader.Text = HeaderSetting;
+      }
+
+      if (strTopicAreas.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length == 1)
+      {
+        cssLiteral.Text = cssStr;
+      }
+      else
+      {
+        cssLiteral.Text = "";
+      }
+
       try
       {
         maxItems = int.Parse(this.MaxItemsSetting);
@@ -177,96 +209,6 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, maxItems, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
       this.RegistrationRepeater.DataBind();
 
-      //cssStr = "<style type='text/css'>.TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;}</style>";
-      //TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
-      //luidIsEmpty = (Request.QueryString["luid"] == null);
-
-      //if (!TopicAreaIDIsEmpty) //if there is a LookupID set for this module instance it takes priority.
-      //{
-      //  strTopicAreas = TopicAreaIDSetting;
-      //}
-      //else if (!luidIsEmpty) //else if there is an "luid" QueryString value, use it instead.
-      //{
-      //  strTopicAreas = Request.QueryString["luid"];
-      //}
-      //else
-      //{
-      //  strTopicAreas = "";
-      //  DefaultHeader.Visible = true;
-      //}
-
-      //if (HeaderSetting.Trim().Length > 0)
-      //{
-      //  DefaultHeader.Text = HeaderSetting;
-      //}
-
-      //BindRegistrationRepeater(RegistrationRepeater, "evnt_sp_JFBC_get_eventLiveList_ministryOption3", strTopicAreas, "@TopicAreas");
-
-      //ErrorMsg.Text = errMsg;
-
-      //if (strTopicAreas.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length == 1)
-      //{
-      //  cssLiteral.Text = cssStr;
-      //}
-      //else
-      //{
-      //  cssLiteral.Text = "";
-      //}
-    }
-
-    /// <summary>
-    /// event function for statement completed
-    /// </summary>
-    ///
-    protected void Bind_SqlCommand_StatementCompleted(object sender, StatementCompletedEventArgs e)
-    {
-      if (e.RecordCount == 0)
-      {
-        errMsg = "<p class=\"errorText\">There are no valid events to show.</p>";
-        ErrorMsg.Text = errMsg;
-        DefaultHeader.Visible = true;
-        RegistrationRepeater.Visible = false;
-      }
-    }
-
-    protected void BindRegistrationRepeater(Repeater myRepeater, string myStoredProcedureName, string myParameter, string myParameterName)
-    {
-      using (SqlConnection connection = new Arena.DataLib.SqlDbConnection().GetDbConnection())
-      {
-        // Create the command and set its properties.
-        SqlCommand command = new SqlCommand();
-        command.Connection = connection;
-        command.CommandText = myStoredProcedureName;
-        command.CommandType = CommandType.StoredProcedure;
-        command.StatementCompleted += new StatementCompletedEventHandler(Bind_SqlCommand_StatementCompleted);
-
-        // Add the input parameter and set its properties.
-        SqlParameter parameter = new SqlParameter();
-        parameter.ParameterName = myParameterName;
-        parameter.SqlDbType = SqlDbType.VarChar;
-        parameter.Direction = ParameterDirection.Input;
-        parameter.Value = myParameter;
-
-        // Add the OrganizationID parameter and set its properties.
-        SqlParameter orgIdParam = new SqlParameter();
-        orgIdParam.ParameterName = "@OrganizationId";
-        orgIdParam.SqlDbType = SqlDbType.Int;
-        orgIdParam.Direction = ParameterDirection.Input;
-        orgIdParam.Value = ArenaContext.Current.Organization.OrganizationID;
-
-        // Add the parameter to the Parameters collection. 
-        command.Parameters.Add(parameter);
-        command.Parameters.Add(orgIdParam);
-
-        // Open the connection and execute the reader.
-        connection.Open();
-        SqlDataReader reader = command.ExecuteReader();
-
-        myRepeater.DataSource = reader;
-        myRepeater.DataBind();
-
-        reader.Close();
-      }
     }
 
     protected void RegistrationRepeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
@@ -274,63 +216,78 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       // Execute the following logic for Items and Alternating Items.
       if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
       {
+        // Hide all rows initially--they will be made visible if they meet certain criteria.
+        e.Item.Visible = false;
         int intPromoId;
         bool result = Int32.TryParse(((DataRowView)e.Item.DataItem)["promotion_request_id"].ToString(), out intPromoId);
         if (result)
         {
           SqlDataReader PromoSqlDataReader = new PromotionRequestData().GetPromotionRequestByID(intPromoId, ArenaContext.Current.Organization.OrganizationID);
-          
-          //PromoSqlDataReader.Close();
-          //if (!PromoSqlDataReader.IsDBNull(PromoSqlDataReader.GetOrdinal("web_start_date")))
-          //{
-          int intWebStartDateColumn = PromoSqlDataReader.GetOrdinal("event_id");
+          // Get the ordinal number of the "event_id" column.
+          int intEventIdColumn = PromoSqlDataReader.GetOrdinal("event_id");
+          // Confirm that the SqlDataReader has returned rows of data before continuing.
           if (PromoSqlDataReader.HasRows)
           {
+            // Begin reading rows of data and perform actions upon each one.
             while (PromoSqlDataReader.Read())
             {
-              if (!PromoSqlDataReader.IsDBNull(intWebStartDateColumn))
+              if (!PromoSqlDataReader.IsDBNull(intEventIdColumn))
               {
-                EventProfile eventProfile1 = new EventProfile(PromoSqlDataReader.GetInt32(intWebStartDateColumn));
+                // Create an EventProfile object based on the event id in the current row.
+                // An EventProfile object contains methods which return properties for an event.
+                EventProfile eventProfile1 = new EventProfile(PromoSqlDataReader.GetInt32(intEventIdColumn));
+                // Determine if the event's type is to be displayed.
+                if (ItemIsEventType(eventProfile1.Type.LookupID))
+                {
+                  // The item meets all criteria--make the row visible.
+                  e.Item.Visible = true;
+                  // Use the EventProfile object to display data about the event in the current row.
+                  ((Label)e.Item.FindControl("StartDateLabel")).Text = ShowStartDateLabel(eventProfile1.Type.LookupID) ? HiddenDateSetting : DateTimeExtensions.ToShortDateString(eventProfile1.Start, true);
+                  ((Label)e.Item.FindControl("TopicAreaLabel")).Text = eventProfile1.TopicArea.Value;
 
-                ((Label)e.Item.FindControl("StartDateLabel")).Text = DateTimeExtensions.ToShortDateTimeString(eventProfile1.Start, true); // = PromoSqlDataReader.GetInt32(intWebStartDateColumn).ToString(); // "<b>***Good***</b>";
-                //((Label)e.Item.FindControl("StartDateLabel")).Text = PromoSqlDataReader.GetDateTime(intWebStartDateColumn).ToShortDateString(); // "<b>***Good***</b>";
+                  // Uncomment the following line for debugging in development only.
+                  //((Label)e.Item.FindControl("TopicAreaLabel")).Text += " | " + eventProfile1.Type.Value + " | " + ItemIsEventType(eventProfile1.Type.LookupID).ToString() + " | " + ShowStartDateLabel(eventProfile1.Type.LookupID).ToString() + " | " + DatelessEventTypeIDSetting.ToString();
+                }
               }
             }
           }
           PromoSqlDataReader.Close();
-          //}
-
-    //    System.Data.Common.DbDataRecord rd = (System.Data.Common.DbDataRecord)e.Item.DataItem;
-
-    //    CheckForDatelessEventTypes(e, rd);
-
-    //    if (DisplayEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length > 0)
-    //    {
-    //      e.Item.Visible = ItemIsEventType(e, rd);
-    //    }
         }
-
       }
     }
 
-    //protected void CheckForDatelessEventTypes(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
-    //{
-    //  string[] datelessEventTypes = DatelessEventTypeIDSetting.Split(',');
-    //  String type_luid = (rd)["type_luid"].ToString();
+    /// <summary>
+    /// Returns true if the Event Type ID is found in the DisplayEventTypeIDSetting array.</summary>
+    /// <param name="eventTypeId">The ID of the event being tested.</param>
+    protected bool ItemIsEventType(int eventTypeId)
+    {
+      int number;
+      bool result = Int32.TryParse(eventTypeId.ToString(), out number);
+      if (result)
+      {
+        string[] displayEventTypes = DisplayEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        if (displayEventTypes.Length > 0)
+        {
+          return displayEventTypes.Contains(eventTypeId.ToString());
+        }
+        else
+        {
+          return true;
+        }
+      }
+      else
+      {
+        return false;
+      }
+    }
 
-    //  if (datelessEventTypes.Contains(type_luid))
-    //  {
-    //    ((Label)e.Item.FindControl("DateLabel")).Text = HiddenDateSetting;
-    //  }
-    //}
-
-    //protected bool ItemIsEventType(RepeaterItemEventArgs e, System.Data.Common.DbDataRecord rd)
-    //{
-    //  string[] displayEventTypes = DisplayEventTypeIDSetting.Split(',');
-    //  String type_luid = (rd)["type_luid"].ToString();
-
-    //  return displayEventTypes.Contains(type_luid);
-
-    //}
+    /// <summary>
+    /// Returns true if the Event Type ID is found in the DatelessEventTypeIDSetting array.</summary>
+    /// <param name="eventTypeId">The ID of the event being tested.</param>
+    protected bool ShowStartDateLabel(int eventTypeId)
+    {
+      string[] datelessEventTypes = DatelessEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+      return datelessEventTypes.Contains(eventTypeId.ToString());
+    }
   }
 }

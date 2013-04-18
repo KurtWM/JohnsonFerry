@@ -44,11 +44,11 @@
                 </div>
             </td>
             <td class="TopicColumn_<%# this.UniqueID.Replace("$", String.Empty) %>">
-                [ministry]</td> 
+                <asp:Label id="TopicAreaLabel" Runat="server"/></td> 
             <td>
                 <strong><a href="default.aspx?page=<%=CurrentPortalPage.PortalPageID.ToString()%>&promotionId=<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>"><%# DataBinder.Eval(Container.DataItem, "title") %> </a></strong></td>
             <td style="text-align: right;">
-                <asp:Label id="StartDateLabel" Text='[date]' Runat="server"/></td> 
+                <asp:Label id="StartDateLabel" Runat="server"/></td> 
         </tr>
     </ItemTemplate>
     <FooterTemplate>
@@ -61,9 +61,9 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $.tablesorter.defaults.sortList = [[2, 0]];
-    $.tablesorter.defaults.widgets = ['zebra'];
     $("#RegistrationListTable").each(function (index) {
+      $.tablesorter.defaults.sortList = [[2, 0]];
+      $.tablesorter.defaults.widgets = ['zebra'];
       $(this).tablesorter({ headers: { 0: { sorter: false}} });
     });
     $('.closeBlockUI').click(function () {
