@@ -209,6 +209,8 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, maxItems, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
       this.RegistrationRepeater.DataBind();
 
+      RegisterScripts();
+
     }
 
     protected void RegistrationRepeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
@@ -289,5 +291,31 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       string[] datelessEventTypes = DatelessEventTypeIDSetting.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
       return datelessEventTypes.Contains(eventTypeId.ToString());
     }
+
+    /// <summary>
+    /// Add JavaScript code to the page.</summary>
+    /// 
+    private void RegisterScripts()
+    {
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.Append("\n\n<script type=\"text/javascript\">\n");
+      stringBuilder.Append("\t$(document).ready(function () {\n");
+      stringBuilder.Append("\t\t$(\".stripeMe tr:odd\").addClass(\"listItem\");\n");
+      stringBuilder.Append("\t\t$(\".stripeMe tr:even\").addClass(\"listAltItem\");\n");
+      stringBuilder.Append("\t});\n");
+      stringBuilder.Append("\tfunction openDialog(obj) {\n");
+      stringBuilder.Append("\t\t$(obj).dialog({ buttons: [\n");
+      stringBuilder.Append("\t\t\t{\n");
+      stringBuilder.Append("\t\t\t\ttext: \"Ok\",\n");
+      stringBuilder.Append("\t\t\t\tclick: function () { $(this).dialog(\"close\"); }\n");
+      stringBuilder.Append("\t\t\t}\n");
+      stringBuilder.Append("\t\t]\n");
+      stringBuilder.Append("\t\t},\n");
+      stringBuilder.Append("\t\t{ title: \"Information\"});\n");
+      stringBuilder.Append("\t}\n");
+      stringBuilder.Append("</script>\n\n");
+      this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ListScripts", ((object)stringBuilder).ToString());
+    }
+
   }
 }

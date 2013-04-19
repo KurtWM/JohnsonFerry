@@ -53,23 +53,6 @@
     </FooterTemplate>
 </asp:Repeater>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $(".stripeMe tr:odd").addClass("listItem");
-    $(".stripeMe tr:even").addClass("listAltItem");
-  });
-
-  function openDialog(obj) {
-    $(obj).dialog({ buttons: [
-      {
-        text: "Ok",
-        click: function () { $(this).dialog("close"); }
-      }
-    ]
-    },
-    { title: "Information"});
-  }
-</script>
 
 
 
