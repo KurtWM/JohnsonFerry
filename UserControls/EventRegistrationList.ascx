@@ -10,7 +10,7 @@
 <asp:Label ID="SimpleMsg" runat="server"></asp:Label>
 <asp:Repeater ID="RegistrationRepeater" runat="server" OnItemDataBound="RegistrationRepeater_ItemDataBound">
     <HeaderTemplate>
-        <table id="RegistrationListTable" class="tablesorter">
+        <table id="RegistrationListTable" class="tablesorter stripeMe">
         <thead>
         <tr>
             <th style="width: 36px;">Details</td>
@@ -26,13 +26,9 @@
             <td valign="top" align="center">
                 <asp:ImageButton ID="AboutBtn" runat="server" 
                     CausesValidation="false" 
-                    OnClientClick='<%# "$.blockUI({ message: $(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "promotion_request_id") + "\"), css: { width: \"275px\"} }); return false;" %>' 
+                    OnClientClick='<%# "openDialog(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "promotion_request_id") + "\"); return false;" %>' 
                     ImageUrl="/images/information2.gif" />
                 <div id='eventdetail<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>' style="display: none; cursor: default;">
-                    <div style="background-color: #D6DEDE; border: none; text-align: left; padding-top: 3px;">
-                    <p style="margin-left: 3px; position: relative; float: left; font-weight: bold;">Event Information</p>
-                    <div class="closeBlockUI" style="background: Transparent url(/Custom/JohnsonFerry/Images/ui-icons_217bc0_256x240.png) no-repeat -100px -132px; width: 14px; height: 14px; margin: 4px 3px; position: relative; float: right;"></div>
-                    <div style="clear: both;"></div></div>
                     <div style="background-color: White;">
                         <div style="text-align: left; margin: 9px;">
                             <h3><%# DataBinder.Eval(Container.DataItem, "title") %></h3>
@@ -57,19 +53,22 @@
     </FooterTemplate>
 </asp:Repeater>
 
-<script src="/Custom/JohnsonFerry/Scripts/jquery.blockUI.js" type="text/javascript"></script>
-
 <script type="text/javascript">
   $(document).ready(function () {
-    $("#RegistrationListTable").each(function (index) {
-      $.tablesorter.defaults.sortList = [[2, 0]];
-      $.tablesorter.defaults.widgets = ['zebra'];
-      $(this).tablesorter({ headers: { 0: { sorter: false}} });
-    });
-    $('.closeBlockUI').click(function () {
-      $.unblockUI();
-    });
-  }); 
+    $(".stripeMe tr:odd").addClass("listItem");
+    $(".stripeMe tr:even").addClass("listAltItem");
+  });
+
+  function openDialog(obj) {
+    $(obj).dialog({ buttons: [
+      {
+        text: "Ok",
+        click: function () { $(this).dialog("close"); }
+      }
+    ]
+    },
+    { title: "Information"});
+  }
 </script>
 
 
