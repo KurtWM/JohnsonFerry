@@ -300,8 +300,11 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       StringBuilder stringBuilder = new StringBuilder();
       stringBuilder.Append("\n\n<script type=\"text/javascript\">\n");
       stringBuilder.Append("\t$(document).ready(function () {\n");
-      stringBuilder.Append("\t\t$(\".stripeMe tr:odd\").addClass(\"listItem\");\n");
-      stringBuilder.Append("\t\t$(\".stripeMe tr:even\").addClass(\"listAltItem\");\n");
+      stringBuilder.Append("\t\t$(\"#RegistrationListTable\").each(function (index) {\n");
+      stringBuilder.Append("\t\t\t$.tablesorter.defaults.sortList = [[2, 0]];\n");
+      stringBuilder.Append("\t\t\t$.tablesorter.defaults.widgets = ['zebra'];\n");
+      stringBuilder.Append("\t\t\t$(this).tablesorter({ headers: { 0: { sorter: false}} });\n");
+      stringBuilder.Append("\t\t});\n");
       stringBuilder.Append("\t});\n");
       stringBuilder.Append("\tfunction openDialog(obj) {\n");
       stringBuilder.Append("\t\t$(obj).dialog({ buttons: [\n");
