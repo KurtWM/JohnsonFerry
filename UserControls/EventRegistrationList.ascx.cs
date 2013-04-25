@@ -100,6 +100,15 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       }
     }
 
+    [BooleanSetting("Hide Summary Popups", "Setting this to true will hide the column of info buttons and will prevent event summary popup dialogs. Default is false.", false, false)]
+    public string HideSummaryPopupSetting
+    {
+      get
+      {
+        return this.Setting("HideSummaryPopup", "false", false);
+      }
+    }
+
     [TextSetting("List Header", "The header for this list.", false)]
     public string HeaderSetting 
     { 
@@ -141,19 +150,39 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
     public string strTopicAreas;
     public string errMsg = "";
     public string cssStr;
+    public int campusID = -1;
+    public int maxItems;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-      if (this.Request["promotionID"] != null)
+      if (!Page.IsPostBack)
       {
-        this.Response.Redirect(new PromotionRequest(int.Parse(this.Request["promotionID"])).DetailUrl(this.Request, this.DetailPageSetting, this.EventDetailPageSetting), true);
+        if (this.Request["promotionID"] != null)
+        {
+          this.Response.Redirect(new PromotionRequest(int.Parse(this.Request["promotionID"])).DetailUrl(this.Request, this.DetailPageSetting, this.EventDetailPageSetting), true);
+        }
+
+        DetermineTopicArea();
+
+        SetVarsForSettings();
+
+        PopulateRegistrationRepeater();
+
+        RegisterScripts();
+
+        if (HideSummaryPopupSetting == "true")
+        {
+          cssStr = cssStr + ".DetailColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;} ";
+        }
+
+        cssLiteral.Text = "<style type='text/css'>" + cssStr + "</style>";
       }
+    }
 
-      int maxItems = 6;
-      cssStr = "<style type='text/css'>.TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;}</style>";
-
-      TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
+    protected void DetermineTopicArea()
+    {
       luidIsEmpty = (Request.QueryString["luid"] == null);
+      TopicAreaIDIsEmpty = (TopicAreaIDSetting.Length == 0);
 
       if (!TopicAreaIDIsEmpty) //if there is a LookupID set for this module instance it takes priority.
       {
@@ -176,13 +205,17 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
 
       if (strTopicAreas.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length == 1)
       {
-        cssLiteral.Text = cssStr;
+        //cssLiteral.Text = "<style type='text/css'>" + cssStr + "</style>";
+        cssStr = cssStr + ".TopicColumn_" + this.UniqueID.Replace("$", String.Empty) + " {display:none;} ";
       }
-      else
-      {
-        cssLiteral.Text = "";
-      }
+      //else
+      //{
+      //  cssLiteral.Text = "";
+      //}
+    }
 
+    protected void SetVarsForSettings()
+    {
       try
       {
         maxItems = int.Parse(this.MaxItemsSetting);
@@ -190,12 +223,14 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       catch
       {
       }
+
       this.eventsOnly = this.EventsOnlySetting.ToLower() == "true";
+
       string script = "";
       if (this.CssFileSetting != string.Empty)
         script = "<link href=\"" + this.Request.ApplicationPath + "/css/" + this.CssFileSetting + "\" type=\"text/css\" rel=\"stylesheet\" />";
       this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "promotionCss", script);
-      int campusID = -1;
+
       if (this.CampusSetting != string.Empty)
       {
         try
@@ -206,11 +241,12 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
         {
         }
       }
+    }
+
+    protected void PopulateRegistrationRepeater()
+    {
       this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, maxItems, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
       this.RegistrationRepeater.DataBind();
-
-      RegisterScripts();
-
     }
 
     protected void RegistrationRepeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
@@ -300,21 +336,24 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       StringBuilder stringBuilder = new StringBuilder();
       stringBuilder.Append("\n\n<script type=\"text/javascript\">\n");
       stringBuilder.Append("\t$(document).ready(function () {\n");
-      stringBuilder.Append("\t\t$(\"#RegistrationListTable\").each(function (index) {\n");
+      stringBuilder.Append("\t\t$(\".tablesorter\").each(function (index) {\n");
       stringBuilder.Append("\t\t\t$.tablesorter.defaults.sortList = [[2, 0]];\n");
       stringBuilder.Append("\t\t\t$.tablesorter.defaults.widgets = ['zebra'];\n");
       stringBuilder.Append("\t\t\t$(this).tablesorter({ headers: { 0: { sorter: false}} });\n");
       stringBuilder.Append("\t\t});\n");
       stringBuilder.Append("\t});\n");
       stringBuilder.Append("\tfunction openDialog(obj) {\n");
-      stringBuilder.Append("\t\t$(obj).dialog({ buttons: [\n");
-      stringBuilder.Append("\t\t\t{\n");
-      stringBuilder.Append("\t\t\t\ttext: \"Ok\",\n");
-      stringBuilder.Append("\t\t\t\tclick: function () { $(this).dialog(\"close\"); }\n");
+
+      stringBuilder.Append("\t$( obj ).dialog({\n");
+      stringBuilder.Append("\t\tmodal: true,\n");
+      stringBuilder.Append("\t\ttitle: \"Information\",\n");
+      stringBuilder.Append("\t\tbuttons: {\n");
+      stringBuilder.Append("\t\t\t\"Done\": function() {\n");
+      stringBuilder.Append("\t\t\t\t$( this ).dialog( \"close\" );\n");
       stringBuilder.Append("\t\t\t}\n");
-      stringBuilder.Append("\t\t]\n");
-      stringBuilder.Append("\t\t},\n");
-      stringBuilder.Append("\t\t{ title: \"Information\"});\n");
+      stringBuilder.Append("\t\t}\n");
+      stringBuilder.Append("\t});\n");
+
       stringBuilder.Append("\t}\n");
       stringBuilder.Append("</script>\n\n");
       this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ListScripts", ((object)stringBuilder).ToString());

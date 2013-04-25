@@ -10,10 +10,10 @@
 <asp:Label ID="SimpleMsg" runat="server"></asp:Label>
 <asp:Repeater ID="RegistrationRepeater" runat="server" OnItemDataBound="RegistrationRepeater_ItemDataBound">
     <HeaderTemplate>
-        <table id="RegistrationListTable" class="tablesorter stripeMe">
+        <table id="RegistrationListTable_<%# this.UniqueID.Replace("$", String.Empty) %>" class="tablesorter">
         <thead>
         <tr>
-            <th style="width: 36px;">Details</td>
+            <th style="width: 36px;" class="DetailColumn_<%# this.UniqueID.Replace("$", String.Empty) %>">Details</td>
             <th class="TopicColumn_<%# this.UniqueID.Replace("$", String.Empty) %>">Ministry</td>
             <th>Event</td>
             <th style="width: 75px;">Start Date</td>
@@ -23,11 +23,8 @@
     </HeaderTemplate>
     <ItemTemplate>
         <tr>
-            <td valign="top" align="center">
-                <asp:ImageButton ID="AboutBtn" runat="server" 
-                    CausesValidation="false" 
-                    OnClientClick='<%# "openDialog(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "promotion_request_id") + "\"); return false;" %>' 
-                    ImageUrl="/images/information2.gif" />
+            <td valign="top" align="center" style="text-align: center;" class="DetailColumn_<%# this.UniqueID.Replace("$", String.Empty) %>">
+                <img src="/images/information2.gif" onclick='<%# "openDialog(\"#eventdetail" + DataBinder.Eval(Container.DataItem, "promotion_request_id") + "\")" %>' onmouseover="this.style.cursor = 'pointer';" alt="View Info" />
                 <div id='eventdetail<%# DataBinder.Eval(Container.DataItem, "promotion_request_id") %>' style="display: none; cursor: default;">
                     <div style="background-color: White;">
                         <div style="text-align: left; margin: 9px;">
