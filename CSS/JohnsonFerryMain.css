@@ -1,7 +1,6 @@
 ﻿@import url("/Custom/JohnsonFerry/CSS/960.css");
 @import url("/Custom/JohnsonFerry/CSS/reset.css");
 @import url("/Custom/JohnsonFerry/CSS/ResetCssMeyerweb.css");
-/*@import url("/Custom/JohnsonFerry/CSS/jquery-ui_revisedForJFBC.css");*/
 @import url("/Custom/JohnsonFerry/CSS/tabs-no-images.css");
 @import url("/Custom/JohnsonFerry/CSS/GCalOverride.css");
 @import url("/Custom/JohnsonFerry/CSS/ajaxcontroltoolkit/calendar/calendar.css");
@@ -318,6 +317,23 @@ div.topNavBar ul li a
     vertical-align: top;
     font-size: 14px;
 }
+/*===== Promotion Display =========================*/
+.promotionImage
+{
+    float: right;
+    height: 150px;
+    margin: 0 0 10px 10px;
+}
+.heading1
+{
+    font-size: 110%;
+    font-weight: bold;
+    color: #336699;
+}
+.promoContactText
+{
+    padding-top: 10px;
+}
 /*===== Serving Opportunity & small group locator pages =========================*/
 #ctl03_ctl05_pnlSearch
 {
@@ -478,6 +494,7 @@ div.topNavBar ul li a
     display: block;
     float: right;
     margin: 0px 0px 10px 10px;
+    height: 150px;
 }    
 #newsletterArticleDisplayBody .author
 {
