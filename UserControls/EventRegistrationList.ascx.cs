@@ -64,7 +64,7 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       } 
     }
 
-    [CustomListSetting("Area Filter", "Filter flag for area.", false, "primary", new string[] { "primary", "secondary", "both", "home" }, new string[] { "primary", "secondary", "both", "home" })]
+    [CustomListSetting("Topic Area Filter", "Filter flag for area.", false, "primary", new string[] { "primary", "secondary", "both", "home" }, new string[] { "primary", "secondary", "both", "home" })]
     public string AreaFilterSetting
     {
       get
@@ -152,9 +152,11 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
     public string cssStr;
     public int campusID = -1;
     public int maxItems;
+    public int itemCounter;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+      itemCounter = 0;
       if (!Page.IsPostBack)
       {
         if (this.Request["promotionID"] != null)
@@ -214,6 +216,9 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       //}
     }
 
+    /// <summary>
+    /// Set variables.
+    /// </summary>
     protected void SetVarsForSettings()
     {
       try
@@ -243,12 +248,20 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       }
     }
 
+    /// <summary>
+    /// Binds data to the Repeater.
+    /// </summary>
     protected void PopulateRegistrationRepeater()
     {
-      this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, maxItems, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
+      this.RegistrationRepeater.DataSource = (object)new PromotionRequestData().GetCurrentPromotionWebRequests_DT(this.TopicAreaIDSetting, this.AreaFilterSetting.ToLower(), campusID, 9999, this.eventsOnly, -1, ArenaContext.Current.Organization.OrganizationID);
       this.RegistrationRepeater.DataBind();
     }
 
+    /// <summary>
+    /// Executes logic for each row in the Repeater as it is bound.
+    /// </summary>
+    /// <param name="Sender"></param>
+    /// <param name="e"></param>
     protected void RegistrationRepeater_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
     {
       // Execute the following logic for Items and Alternating Items.
@@ -256,7 +269,9 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       {
         // Hide all rows initially--they will be made visible if they meet certain criteria.
         e.Item.Visible = false;
+        // Get the promotionId for the current row.
         int intPromoId;
+        // If the promotionId is a valid number, then continue.
         bool result = Int32.TryParse(((DataRowView)e.Item.DataItem)["promotion_request_id"].ToString(), out intPromoId);
         if (result)
         {
@@ -277,14 +292,18 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
                 // Determine if the event's type is to be displayed.
                 if (ItemIsEventType(eventProfile1.Type.LookupID))
                 {
-                  // The item meets all criteria--make the row visible.
-                  e.Item.Visible = true;
-                  // Use the EventProfile object to display data about the event in the current row.
-                  ((Label)e.Item.FindControl("StartDateLabel")).Text = ShowStartDateLabel(eventProfile1.Type.LookupID) ? HiddenDateSetting : DateTimeExtensions.ToShortDateString(eventProfile1.Start, true);
-                  ((Label)e.Item.FindControl("TopicAreaLabel")).Text = eventProfile1.TopicArea.Value;
+                  if (itemCounter < maxItems)
+                  {
+                    // The item meets all criteria--make the row visible.
+                    e.Item.Visible = true;
+                    itemCounter = itemCounter + 1;
+                    // Use the EventProfile object to display data about the event in the current row.
+                    ((Label)e.Item.FindControl("StartDateLabel")).Text = ShowStartDateLabel(eventProfile1.Type.LookupID) ? HiddenDateSetting : DateTimeExtensions.ToShortDateString(eventProfile1.Start, true);
+                    ((Label)e.Item.FindControl("TopicAreaLabel")).Text = eventProfile1.TopicArea.Value;
 
-                  // Uncomment the following line for debugging in development only.
-                  //((Label)e.Item.FindControl("TopicAreaLabel")).Text += " | " + eventProfile1.Type.Value + " | " + ItemIsEventType(eventProfile1.Type.LookupID).ToString() + " | " + ShowStartDateLabel(eventProfile1.Type.LookupID).ToString() + " | " + DatelessEventTypeIDSetting.ToString();
+                    // Uncomment the following line for debugging in development only.
+                    //((Label)e.Item.FindControl("TopicAreaLabel")).Text += " | " + eventProfile1.Type.Value + " | " + ItemIsEventType(eventProfile1.Type.LookupID).ToString() + " | " + ShowStartDateLabel(eventProfile1.Type.LookupID).ToString() + " | " + DatelessEventTypeIDSetting.ToString();
+                  }
                 }
               }
             }
