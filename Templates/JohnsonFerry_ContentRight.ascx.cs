@@ -50,7 +50,7 @@
             System.Web.UI.HtmlControls.HtmlGenericControl jquery_ui_js = new System.Web.UI.HtmlControls.HtmlGenericControl();
             jquery_ui_js.TagName = "script";
             jquery_ui_js.Attributes.Add("type", @"text/javascript");
-            jquery_ui_js.Attributes.Add("src", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js");
+            jquery_ui_js.Attributes.Add("src", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js");
             this.Page.Header.Controls.Add(jquery_ui_js);
             //Add jQuery Tools to page head element.
             System.Web.UI.HtmlControls.HtmlGenericControl jquery_tools_js = new System.Web.UI.HtmlControls.HtmlGenericControl();
@@ -90,6 +90,13 @@
             jfbc_css_contentright.Attributes.Add("type", @"text/css");
             jfbc_css_contentright.Attributes.Add("href", "/custom/johnsonferry/CSS/ContentRight.css");
             this.Page.Header.Controls.Add(jfbc_css_contentright);
+            //Add jQuery UI css theme to page head element.
+            System.Web.UI.HtmlControls.HtmlGenericControl jquerytheme_css = new System.Web.UI.HtmlControls.HtmlGenericControl();
+            jquerytheme_css.TagName = "link";
+            jquerytheme_css.Attributes.Add("rel", @"stylesheet");
+            jquerytheme_css.Attributes.Add("type", @"text/css");
+            jquerytheme_css.Attributes.Add("href", "/Include/scripts/jqueryui/css/custom-theme/jquery-ui-.custom.css");
+            this.Page.Header.Controls.Add(jquerytheme_css);
 			
         }
 
