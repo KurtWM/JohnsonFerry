@@ -363,15 +363,19 @@ namespace ArenaWeb.Custom.JohnsonFerry.UserControls
       stringBuilder.Append("\t});\n");
       stringBuilder.Append("\tfunction openDialog(obj) {\n");
 
-      stringBuilder.Append("\t$( obj ).dialog({\n");
-      stringBuilder.Append("\t\tmodal: true,\n");
-      stringBuilder.Append("\t\ttitle: \"Information\",\n");
-      stringBuilder.Append("\t\tbuttons: {\n");
-      stringBuilder.Append("\t\t\t\"Done\": function() {\n");
-      stringBuilder.Append("\t\t\t\t$( this ).dialog( \"close\" );\n");
-      stringBuilder.Append("\t\t\t}\n");
-      stringBuilder.Append("\t\t}\n");
-      stringBuilder.Append("\t});\n");
+      stringBuilder.Append("\t\t$.getScript(\"http://ajax.googleapis.com/ajax/libs/jqueryui/\" + jQuery.ui.version + \"/jquery-ui.min.js\", function () {\n");
+
+      stringBuilder.Append("\t\t\t$( obj ).dialog({\n");
+      stringBuilder.Append("\t\t\t\tmodal: true,\n");
+      stringBuilder.Append("\t\t\t\ttitle: \"Information\",\n");
+      stringBuilder.Append("\t\t\t\tbuttons: {\n");
+      stringBuilder.Append("\t\t\t\t\t\"Done\": function() {\n");
+      stringBuilder.Append("\t\t\t\t\t\t$( this ).dialog( \"close\" );\n");
+      stringBuilder.Append("\t\t\t\t\t}\n");
+      stringBuilder.Append("\t\t\t\t}\n");
+      stringBuilder.Append("\t\t\t});\n");
+
+      stringBuilder.Append("\t\t});\n");
 
       stringBuilder.Append("\t}\n");
       stringBuilder.Append("</script>\n\n");
