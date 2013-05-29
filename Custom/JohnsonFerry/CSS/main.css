@@ -1,0 +1,94 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* Need to fix TreeView icon img tags because they use attributes to set height and width.
+   Bootstrap sets defaults for img tags, so we need to set the size by brute force. */
+.TreeView img
+{
+  height: 16px !important;
+  max-width: 16px !important;
+}
+
+/* Body and structure
+-------------------------------------------------- */
+
+body {
+  position: relative !important;
+  padding-top: 150px !important;
+}
+
+.logo 
+{
+  margin-top: 12px;
+}
+
+/* Social bar
+-------------------------------------------------- */
+#social-bar {
+  color: #AAA;
+  background-color: #262626;
+  height: 25px;
+  border-bottom: 2px solid #A5A5A5;
+}
+
+/* ID bar
+-------------------------------------------------- */
+#id-bar {
+  color: #AAA;
+  background-color: #FA4913;
+  background-image: url(/Content/HtmlImages/Public/Images/General/warmCoolFracturedBackground.jpg);
+  height: 70px;
+  border-bottom: 2px solid #A5A5A5;
+  top: 27px;
+}
+
+/* Navbar
+-------------------------------------------------- */
+#nav-bar
+{
+  /*top: 20px;*/
+}
+
+.navbar
+{
+  top: 99px !important;
+}
+
+.navbar-inner ul.nav li a
+{
+  font-size: 1.125em;
+  font-weight: bold;
+}
+
+.navbar-inner ul.nav li.dropdown ul.dropdown-menu li a
+{
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.navbar-userinfo
+{
+  line-height: 26px;
+  padding-left: 40px;
+}
+
+.navbar-social
+{
+  line-height: 26px;
+  padding-right: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
