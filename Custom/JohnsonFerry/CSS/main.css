@@ -20,9 +20,9 @@ body {
   padding-top: 150px !important;
 }
 
-.logo 
+#site-logo 
 {
-  margin-top: 12px;
+  margin-left: 40px;
 }
 
 /* Social bar
@@ -80,6 +80,38 @@ body {
   line-height: 26px;
   padding-right: 40px;
 }
+
+/* Dropdown Menu
+-------------------------------------------------- */
+/* Raise dropdown a bit so that it overlaps the control that triggers the hover. */
+.dropdown-menu
+{
+  margin-top: -2px;
+}
+
+/* Make dropdowns activate on hover except when navigation is collapsed by max-width */
+@media (min-width: 979px)
+{
+  ul.nav li.dropdown:hover > ul.dropdown-menu
+  {
+    display: block;    
+  }
+}
+
+/* Make dropdowns inactivate on hover when the navigation is collapsed. */
+/*@media (max-width: 979px)
+{
+  .nav-collapse .dropdown-menu 
+  {
+    display: none;
+  }
+}*/
+
+/* Remove the carat symbol from the dropdown trigger, if desired.
+.nav li.dropdown > a .caret {
+  display: none;
+} */
+
 
 
 

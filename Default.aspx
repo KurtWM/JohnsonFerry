@@ -19,20 +19,6 @@
     <%=PortalTitle%></title>
   <!-- End Arena title tag here -->
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- Begin Boilerplate css links and modernizr link here -->
-  <link rel="stylesheet" href="custom/johnsonferry/css/bootstrap.css">
-  <!-- Add styles here that must cascade AFTER the standard bootstrap but BEFORE the responsive stylesheet -->
-  <style>
-  @media (min-width: 1112px) {
-    body {
-      padding-top: 60px !important;
-      padding-bottom: 42px !important;
-    }
-  }
-  </style>
-  <link rel="stylesheet" href="custom/johnsonferry/css/responsive.css">
-  <link rel="stylesheet" href="custom/johnsonferry/css/main.css">
-  <!-- End Boilerplate css links and modernizr link here -->
   <!-- Begin Arena header script placeholder here -->
   <!-- These stylesheets and scripts will be added to the end of the document HEAD -->
   <asp:PlaceHolder ID="phHeaderScript" runat="server" Visible="false" />
@@ -76,10 +62,6 @@
   <!-- End Arena site or application content here -->
   <!-- Begin Boilerplate JavaScripts here -->
   <script type="text/javascript">    window.jQuery || document.write('<script src="custom/johnsonferry/scripts/vendor/jquery-1.9.0.min.js"><\/script>')</script>
-  <script src="custom/johnsonferry/scripts/vendor/modernizr-2.6.2-respond-1.1.0.min.js" type="text/javascript"></script>
-  <script src="custom/johnsonferry/scripts/vendor/bootstrap.min.js" type="text/javascript"></script>
-  <script src="custom/johnsonferry/scripts/plugins.js" type="text/javascript"></script>
-  <script src="custom/johnsonferry/scripts/main.js" type="text/javascript"></script>
   <!-- End Boilerplate JavaScripts here -->
   <!-- Begin Arena site Google Analytics content here -->
   <asp:PlaceHolder ID="phGoogleAnalytics" runat="server" Visible="false" />

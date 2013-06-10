@@ -11,7 +11,7 @@ $(document).ready(function () {
   * ======================================================= */
 
   // Create variable of all anchors with class='logWrap.'
-  var loginTags = $(".logWrap a");
+  var loginTags = $(".navbar-fixed-top .logWrap a");
   // Add navbar-link class for Bootstrap compatibility.
   loginTags.addClass("navbar-link");
   // Add arena-modified class to indicate modified elements.

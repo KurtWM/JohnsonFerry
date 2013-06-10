@@ -34,7 +34,11 @@
           </div>
         </div>
         <div id="id-bar" class="navbar-fixed-top">
-          LOGO
+          <div class="row-fluid">
+            <div class="span2">
+              <a href="/"><img src="/Content/HtmlImages/Public/Images/General/reverse_JFlogomark-small.png" alt="Johnson Ferry Logo" id="site-logo" /></a>
+            </div>
+          </div>
         </div>
         <div id="nav-bar" class="row-fluid">
           <asp:PlaceHolder ID="NavCell" Runat="server"></asp:PlaceHolder>
@@ -47,7 +51,6 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span3">
-      <h1 class="logo"><a href="/"><img src="/Custom/JohnsonFerry/Images/Johnson-Ferry-logo-top.png" alt="Johnson Ferry logo" /></a></h1>
       <asp:PlaceHolder ID="SubNavCell" Runat="server"></asp:PlaceHolder>
     </div><!--/span-->
     <div class="span9">
