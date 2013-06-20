@@ -2,7 +2,7 @@
  * Arena-Bootstrap compatibility scripts
  *
  * These scripts attempt to modify certain Arena structures 
- * to be more compatible with Bootstrap.
+ * to be more compatible with Bootstrap. 
  * ====================================================== */
 
 $(document).ready(function () {
