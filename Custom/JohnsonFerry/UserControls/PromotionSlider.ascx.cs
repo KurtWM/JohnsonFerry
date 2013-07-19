@@ -106,7 +106,7 @@
     {
       get
       {
-        return this.Setting("IsStretchHeight", "false", false);
+        return this.Setting("IsStretchHeight", "false", true);
       }
     }
 
@@ -173,33 +173,42 @@
       }
     }
 
+    public int intCampus;
+    public int intMaxItems;
+    public int intImageType;
+    public bool boolEventsOnly;
+    public string sliderID;
+    public bool boolIsFit;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-      int intCampus;
       if (!int.TryParse(CampusSetting, out intCampus))
       {
         intCampus = -1;
       }
 
-      int intMaxItems;
       if (!int.TryParse(MaxItemsSetting, out intMaxItems))
       {
         intMaxItems = -1;
       }
 
-      int intImageType;
       if (!int.TryParse(ImageTypeSetting, out intImageType))
       {
         intImageType = -1;
       }
 
-      bool boolEventsOnly;
       if (!Boolean.TryParse(EventsOnlySetting, out boolEventsOnly))
       {
         boolEventsOnly = false;
       }
 
-      string sliderID = this.ClientID + "_slider";
+      sliderID = this.ClientID + "_slider";
+
+      WriteSlider();
+    }
+
+    void WriteSlider()
+    {
 
       PromotionRequestCollection requestCollection = new PromotionRequestCollection();
       requestCollection.LoadCurrentWebRequests(TopicAreaIDSetting, "both", intCampus, intMaxItems, boolEventsOnly, intImageType);
@@ -212,10 +221,24 @@
       {
         //string strTarget = "_parent"; // promoRequest.WebExternalLink == promoRequest.DetailUrl("", DetailPageSetting, EventDetailPageSetting) ? "_blank" : "_parent";
         string strTarget = promoRequest.WebExternalLink == promoRequest.DetailUrl("", DetailPageSetting, EventDetailPageSetting) ? "_blank" : "_parent";
-
-        this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("<div class='item'>\n")));
+        try
+        {
+          boolIsFit = Convert.ToBoolean(IsStretchHeightSetting);
+        }
+        catch (FormatException)
+        {
+          Console.WriteLine("Unable to convert '{0}' to a Boolean.", IsStretchHeightSetting);
+        }
+        this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("<div class='slider-slide'>\n")));
         this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t<a href='{0}' target='{1}'>\n", promoRequest.DetailUrl("", DetailPageSetting, EventDetailPageSetting), strTarget)));
-        this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t\t<img src='/CachedBlob.aspx?guid={0}' alt='{1}' style='width: 100%; {2}'>\n", promoRequest.Documents.GetFirstByType(intImageType).GUID, promoRequest.Title, Convert.ToBoolean(IsStretchHeightSetting) ? "height: 100%;" : "")));
+        try
+        {
+          this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t\t<img src='/CachedBlob.aspx?guid={0}' alt='{1}' style='width: 100%; {2}'>\n", promoRequest.Documents.GetFirstByType(intImageType).GUID, promoRequest.Title, boolIsFit ? "height: 100%;" : "")));
+        }
+        catch (System.NullReferenceException err)
+        {
+          Console.WriteLine("Error writing image tag. Message = {0}", err.Message);
+        }
         this.phSlider.Controls.Add((Control)new LiteralControl("\t</a>\n"));
         this.phSlider.Controls.Add((Control)new LiteralControl("</div>\n"));
       }
@@ -223,24 +246,19 @@
 
       StringBuilder sliderScript = new StringBuilder();
       sliderScript.Append("$(document).ready(function(){\n");
-
-      // Paging and Navigation code is commented out:
-      //sliderScript.Append(string.Format("\t\t$(\'#{0}\').hover(\n", sliderID));
-      //sliderScript.Append(string.Format("\t\tfunction() {{ $(\'#nav_{0}\').fadeIn(); }},\n", sliderID));
-      //sliderScript.Append(string.Format("\t\tfunction() {{ $(\'#nav_{0}\').fadeOut(); }}\n", sliderID));
-      //sliderScript.Append(");\n\n");
-
       sliderScript.Append(string.Format("$(\"#{0}\").cycle({{\n", sliderID, sliderID));
       sliderScript.Append(string.Format("fx: \'{0}\',\n", SliderTransitionSetting));
       sliderScript.Append(string.Format("speed: {0},\n", SpeedSetting));
       sliderScript.Append(string.Format("timeout: {0},\n", TimeoutSetting));
-      sliderScript.Append(string.Format("pause: {0},\n", IsPauseSetting));
-      sliderScript.Append("fit: 1,\n");
-      sliderScript.Append(string.Format("width: {0},\n", SliderWidthSetting));
-      sliderScript.Append(string.Format("height: {0},\n", SliderHeightSetting));
+      sliderScript.Append(string.Format("pause: '{0}',\n", IsPauseSetting));
+      sliderScript.Append(string.Format("fit: '{0}',\n", IsStretchHeightSetting));
+      sliderScript.Append(string.Format("width: '{0}',\n", SliderWidthSetting));
+      if (SliderHeightSetting.Length > 0)
+      {
+        sliderScript.Append(string.Format("height: '{0}',\n", SliderHeightSetting));
+      }
+      //sliderScript.Append(string.Format("containerResize: '{0}',\n", "1"));
       sliderScript.Append(string.Format("random: {0}\n", IsRandomSetting));
-      // Paging and Navigation code is commented out:
-      //sliderScript.Append(string.Format("\t\tpager: \'#nav_{0}\'\n", sliderID));
       sliderScript.Append("\t});\n");
       sliderScript.Append("});\n");
 
