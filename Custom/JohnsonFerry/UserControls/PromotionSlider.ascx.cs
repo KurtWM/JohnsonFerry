@@ -241,33 +241,6 @@
       }
       this.phSlider.Controls.Add((Control)new LiteralControl("</div><!-- /.slider-outer -->\n"));
 
-      
-      
-      this.phSlider.Controls.Add((Control)new LiteralControl("<div id='churchonline_counter'>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t<div class='live'>Live Now</div>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t<div class='info'>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<div class='title'></div>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<div class='description'></div>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t</div>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t<ul class='time'>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<li><span class='days'></span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t\t<span class='label'>days</span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t</li>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<li><span class='hours'></span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t\t<span class='label'>hrs</span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t</li>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<li><span class='minutes'></span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t\t<span class='label'>mins</span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t</li>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t<li><span class='seconds'></span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t\t<span class='label'>secs</span>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t\t</li>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("\t</ul>\n"));
-      this.phSlider.Controls.Add((Control)new LiteralControl("</div>\n"));
-      
-      
-      this.phSlider.Controls.Add((Control)new LiteralControl("<div id='output'></div>\n"));
-
       StringBuilder sliderScript = new StringBuilder();
       sliderScript.Append("$(window).load(function(){\n");
       sliderScript.Append(string.Format("\t$(\"#{0}\").cycle({{\n", sliderID, sliderID));
@@ -281,26 +254,14 @@
       {
         sliderScript.Append(string.Format("\t\theight: '{0}',\n", SliderHeightSetting));
       }
-      sliderScript.Append("\t\tafter: onAfter,\n");
       sliderScript.Append("\t\tslideResize: '0',\n");
       sliderScript.Append("\t\tcontainerResize: '0',\n");
       sliderScript.Append(string.Format("\t\trandom: {0}\n", IsRandomSetting));
       sliderScript.Append("\t});\n");
 
-
-      sliderScript.Append("function onAfter() {\n");
-      sliderScript.Append("$('#output').html(\"Scroll complete for:<br>\" + this.href)\n");
-      sliderScript.Append(".append('<h3>' + this.title + '</h3>');\n");
-      sliderScript.Append("}\n");
-
-      sliderScript.Append("$('#churchonline_counter').css({'position':'absolute','top':$('.slider-outer').position().top,'right':$('.slider-outer').css('right'),'z-index':'100'});\n");
-      sliderScript.Append("countdowntimer('http://jfcontemporary.churchonline.org/event_times/next');\n");
-
       sliderScript.Append("});\n");
 
       Page.ClientScript.RegisterStartupScript(this.GetType(), sliderID, sliderScript.ToString(), true);
-
-
     }
   }
 }

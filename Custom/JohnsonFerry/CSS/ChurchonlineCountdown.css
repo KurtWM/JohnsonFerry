@@ -1,0 +1,49 @@
+﻿.churchonline-countdown {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 100%;
+    overflow: auto;
+    display: none;
+}
+.churchonline-countdown .time {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.churchonline-countdown .time li {
+    float: left;
+    white-space: nowrap;
+    margin: 0 0 0 3px;
+    padding: 10px;
+    text-align: center;
+    color: #7ea8d5;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.churchonline-countdown .time li:first-child {
+    margin: 0;
+}
+.churchonline-countdown .time li span {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.churchonline-countdown .description, .churchonline-countdown .time li .label {
+    font-size: 0.8em;
+    color: #FFFFFF;
+}
+.churchonline-countdown .live {
+    display: none;
+    font-weight: bold;
+}
+.churchonline-countdown .info {
+    color: #FFFFFF;
+}
+.churchonline-countdown .info .title {
+    color: #FFFFFF;
+    display: none;
+}
+.churchonline-countdown .info .description {
+    color: #FFFFFF;
+    display: none;
+}

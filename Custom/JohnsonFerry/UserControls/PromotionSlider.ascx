@@ -1,46 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="PromotionSlider.ascx.cs" Inherits="ArenaWeb.Custom.JohnsonFerry.UserControls.PromotionSlider" %>
 
-<script src="/Custom/JohnsonFerry/Scripts/jquery.cycle.all.js" type="text/javascript"></script>
-
-<script src="/Custom/JohnsonFerry/Scripts/countdownTimer.js" type="text/javascript"></script>
-
-<style>
-#churchonline_counter {
-    overflow: auto;
-    padding: 10px;
-    margin: 0 auto 0 auto;
-    display: none;
-}
-
-#churchonline_counter .description, #churchonline_counter .time li .label {
-    font-size: 0.8em;
-}
-#churchonline_counter .time {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-#churchonline_counter .time li {
-    float: left;
-    padding: 0 10px;
-    text-align: center;
-}
-#churchonline_counter .time li:first-child {
-    padding-left: 0;
-}
-#churchonline_counter .time li span {
-    font-size: 1.2em;
-}
-#churchonline_counter .live {
-    display: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #43a800;
-    font-size: 14;
-    text-align: center;
-}
-</style>
+<!-- If the jQuery Cycle plugin is not loaded then try to load it from the CDN. -->
+<script type="text/javascript">
+  if (typeof $.fn.cycle === 'undefined') {
+    document.write('<script src="http://malsup.github.io/jquery.cycle.all.js" type="text/javascript"><\/script>');
+  }
+</script>
+<!-- Check once more to see if the jQuery Cycle plugin loaded successfully. If not, then load it from server. -->
+<script type="text/javascript">
+  $.fn.cycle || document.write('<script src="/Custom/JohnsonFerry/Scripts/jquery.cycle.all.js" type="text/javascript"><\/script>')
+</script>
 
 <asp:PlaceHolder ID="phSlider" runat="server"></asp:PlaceHolder>
 
