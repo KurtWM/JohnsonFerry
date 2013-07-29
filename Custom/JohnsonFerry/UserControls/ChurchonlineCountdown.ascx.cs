@@ -44,6 +44,15 @@
       }
     }
 
+    [TextSetting("Link URL", "The URL to link to when the countdown timer is clicked.", false)]
+    public string LinkUrlSetting
+    {
+      get
+      {
+        return this.Setting("LinkUrl", "", false);
+      }
+    }
+
     [CssSetting("Css File", "An optional CSS File to use for this module. Default: /Custom/JohnsonFerry/CSS/ChurchonlineCountdown.css", false)]
     public string CssFileSetting
     {

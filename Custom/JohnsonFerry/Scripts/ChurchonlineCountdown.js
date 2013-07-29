@@ -7,7 +7,7 @@
 // timerId   = A text string that will be used as the ID attribute for the countdown timer.
 // container = A jQuery selector string for the DOM element where the countdown timer will be placed.
 //             If the container does not exist, the countdown timer will be placed in the body of the page.
-$(countdowntimer = function (nextUrl, timerId, container) {
+$(countdowntimer = function (nextUrl, timerId, container, linkUrl) {
   // If no timerId then don't create countdown timer.
   if (typeof timerId != 'undefined') {
     var days;
@@ -17,7 +17,7 @@ $(countdowntimer = function (nextUrl, timerId, container) {
     var intervalId;
     // Write HTML for countdown timer elements.
     var counterCode = '<div id="' + timerId + '" class="churchonline-countdown" style="display: none;">\n';
-    counterCode = counterCode + '\t<div class="live">Live Now</div>\n';
+    counterCode = counterCode + '\t<a href="' + linkUrl + '" target="_blank"><div class="live">Live Now</div>\n';
     counterCode = counterCode + '\t<div class="info">\n';
     counterCode = counterCode + '\t\t<div class="title"></div>\n';
     counterCode = counterCode + '\t\t<div class="description"></div>\n';
@@ -35,7 +35,7 @@ $(countdowntimer = function (nextUrl, timerId, container) {
     counterCode = counterCode + '\t\t<li><span class="seconds"></span>\n';
     counterCode = counterCode + '\t\t\t<span class="label">secs</span>\n';
     counterCode = counterCode + '</li>\n';
-    counterCode = counterCode + '\t</ul>\n';
+    counterCode = counterCode + '\t</ul></a>\n';
     counterCode = counterCode + '</div>\n';
 
     if ($(container).length > 0) {

@@ -2,6 +2,6 @@
 <%@ Register TagPrefix="Arena" Namespace="Arena.Portal.UI" Assembly="Arena.Portal.UI" %>
 
 <script type="text/javascript">
-  countdowntimer('<%# NextEventUrlSetting %>', '<%# CountdownIdSetting %>', '<%# CountdownContainerSetting %>');
+  countdowntimer('<%# NextEventUrlSetting %>', '<%# CountdownIdSetting %>', '<%# CountdownContainerSetting %>', '<%# LinkUrlSetting %>');
 </script>
 
