@@ -155,6 +155,15 @@
       }
     }
 
+    //[CssSetting("Css File", "An optional CSS File to use for this module. Default: /Custom/JohnsonFerry/CSS/PromotionSlider.css", false)]
+    //public string CssFileSetting
+    //{
+    //  get
+    //  {
+    //    return this.Setting("CssFile", "/Custom/JohnsonFerry/CSS/PromotionSlider.css", false);
+    //  }
+    //}
+
     //[BooleanSetting("Show Navigation", "Determines whether the small navigation graphic will appear in the bottom right corner of the Slider.", true, true)]
     //public string ShowNavigationSetting
     //{
@@ -204,8 +213,14 @@
 
       sliderID = this.ClientID + "_slider";
 
+      //RegisterScripts();
       WriteSlider();
     }
+
+    //private void RegisterScripts()
+    //{
+    //  BasePage.AddCssLink(Page, ResolveUrl(CssFileSetting));
+    //}
 
     void WriteSlider()
     {
@@ -228,6 +243,7 @@
         }
         //this.phSlider.Controls.Add((Control)new LiteralControl("\t<div class='slider-slide' style='display: none;'>\n"));
         this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t\t<a href='{0}' target='{1}' title='{2}' style='display: none;'>\n", promoRequest.DetailUrl("", DetailPageSetting, EventDetailPageSetting), strTarget, promoRequest.Title)));
+        //this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t\t<div class='promoText'>{0}</div>\n", promoRequest.WebText)));
         try
         {
           this.phSlider.Controls.Add((Control)new LiteralControl(string.Format("\t\t\t<img src='/CachedBlob.aspx?guid={0}' alt='{1}' style='width: 100%;{2}' />\n", promoRequest.Documents.GetFirstByType(intImageType).GUID, promoRequest.Title, boolIsFit ? " height: 100%;" : "")));
