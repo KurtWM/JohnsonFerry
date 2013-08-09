@@ -66,3 +66,5 @@
 /Verify.aspx
 /WindowsAuthenticationLogin.aspx
 /Default_original.aspx
+.sass-cache/
+.DS_Store
